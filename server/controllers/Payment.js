@@ -1,6 +1,6 @@
 const {instance} = require("../config/razorpay")
-const Course = require("../models/Course")
-const User = require("../models/User")
+const Course = require("../models/Course.model")
+const User = require("../models/User.model")
 const {courseEnrollmentEmail} = require("../Mail/Template/courseEnrollmentEmail")
 const { Mongoose } = require("mongoose")
 const mailSender = require("../utils/mailSender")

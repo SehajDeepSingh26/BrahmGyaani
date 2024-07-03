@@ -1,5 +1,5 @@
 const { Long } = require('mongodb');
-const User = require('../models/User');
+const User = require('../models/User.model');
 const mailSender = require('../utils/mailSender')
 const bcrypt = require("bcrypt")
 
