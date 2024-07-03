@@ -12,13 +12,13 @@
     "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""
   },
   "dependencies": {
-    "concurrently": "^8.2.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "@reduxjs/toolkit": "^2.2.5",
     "axios": "^1.7.2",
     "chart.js": "^4.4.3",
+    "concurrently": "^8.2.2",
+    "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.2.1",
