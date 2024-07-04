@@ -13,7 +13,7 @@ const CodeBlocks = ({
     <div className={`flex ${position} my-20 justify-between gap-10`}>
       
     {/*Section 1*/}
-    <div className='w-[50%] flex flex-col gap-8'>
+    <div className='w-[50%] flex flex-col gap-2 flex-wrap'>
         {heading}
         <div className='text-richblack-300 font-bold '>
             {subheading}
@@ -36,7 +36,7 @@ const CodeBlocks = ({
     </div>
 
      {/*Section 2*/}
-     <div className=' h-fit  flex flex-row text-10[px] w-[100%] py-4 lg:w-[500px]'> 
+     <div className=' h-fit flex flex-row text-10[px] w-[50%] py-4 lg:w-[500px]'> 
         {/*HW -> BG gradient*/}
 
         <div className='text-center flex flex-col w-[10%] text-richblack-400 font-inter font-bold'>
@@ -46,11 +46,10 @@ const CodeBlocks = ({
             <p>4</p>
             <p>5</p>
             <p>6</p>
-            <p>7</p>
+            <p>7</p>    
             <p>8</p>
             <p>9</p>
             <p>10</p>
-            <p>11</p>
         </div>
 
         <div className={`w-[90%] flex flex-col gap-2 font-bold font-mono ${codeColor} pr-2`}>
