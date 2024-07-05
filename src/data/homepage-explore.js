@@ -1,117 +1,118 @@
 export const HomePageExplore = [
     {
         tag: 'Free',
-        courses : [
+        courses: [
             {
-                heading : "Learn HTML",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Learn HTML",
+                description: "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
+                level: 'Beginner',
+                lessonNumber: 10
             },
             {
-                heading : "Learn CSS",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Learn CSS",
+                description: "This course introduces CSS, teaching you how to style web pages, manage layouts, and create visually appealing websites.",
+                level: 'Beginner',
+                lessonNumber: 8
             },
             {
-                heading : "Responsive Web design",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Responsive Web design",
+                description: "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes.",
+                level: 'Beginner',
+                lessonNumber: 7
             },
         ]
     },
     {
         tag: 'New to coding',
-        courses : [
+        courses: [
             {
-                heading : "HTML",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "HTML",
+                description: "Begin your coding journey with HTML, learning the foundational language for structuring web pages.",
+                level: 'Beginner',
+                lessonNumber: 9
             },
             {
-                heading : "CSS",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "CSS",
+                description: "Get started with CSS to learn how to style and layout web pages effectively.",
+                level: 'Beginner',
+                lessonNumber: 6
             },
             {
-                heading : "Responsive ",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Responsive",
+                description: "Understand the principles of responsive design to create websites that work well on all devices.",
+                level: 'Beginner',
+                lessonNumber: 5
             },
         ]
     },
     {
         tag: 'Most popular',
-        courses : [
+        courses: [
             {
-                heading : "Java",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Java",
+                description: "Learn Java, a versatile and powerful programming language used in a variety of applications.",
+                level: 'Beginner',
+                lessonNumber: 12
             },
             {
-                heading : "Python",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Python",
+                description: "Explore Python, known for its simplicity and wide range of applications, from web development to data science.",
+                level: 'Beginner',
+                lessonNumber: 14
             },
             {
-                heading : "SCSS",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "SCSS",
+                description: "Dive into SCSS to enhance your CSS skills with variables, nesting, and other advanced features.",
+                level: 'Beginner',
+                lessonNumber: 10
             },
         ]
     },
     {
         tag: 'Skills paths',
-        courses : [
+        courses: [
             {
-                heading : "Flask",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Flask",
+                description: "Discover Flask, a lightweight Python web framework for building web applications quickly and efficiently.",
+                level: 'Beginner',
+                lessonNumber: 8
             },
             {
-                heading : "Django",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Django",
+                description: "Learn Django, a high-level Python web framework that encourages rapid development and clean, pragmatic design.",
+                level: 'Beginner',
+                lessonNumber: 15
             },
             {
-                heading : "Fast API",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Fast API",
+                description: "Explore FastAPI, a modern, fast web framework for building APIs with Python 3.7+ based on standard Python type hints.",
+                level: 'Beginner',
+                lessonNumber: 10
             },
         ]
     },
     {
         tag: 'Career paths',
-        courses : [
+        courses: [
             {
-                heading : "Next.js",
-                description : "This course covers the basic concepts of HTML including creating and structuring web pages, adding text, links, images, and more.",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Next.js",
+                description: "Master Next.js, a powerful React framework for building server-side rendering and static web applications.",
+                level: 'Beginner',
+                lessonNumber: 12
             },
             {
-                heading : "Nuxt.js",
-                description : "This course explores advanced topics in HTML5 and CSS3, including animations, transitions, and layout techniques",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Nuxt.js",
+                description: "Get acquainted with Nuxt.js, a framework for creating Vue.js applications with server-side rendering.",
+                level: 'Beginner',
+                lessonNumber: 11
             },
             {
-                heading : "Sanity",
-                description : "This course teaches responsive web design techniques, allowing web pages to adapt to different devices and screen sizes",
-                level : 'Beginner',
-                lessionNumber : 6
+                heading: "Sanity",
+                description: "Learn how to use Sanity, a structured content platform that powers remarkable digital experiences.",
+                level: 'Beginner',
+                lessonNumber: 9
             },
         ]
     },
-]
+];
+ 

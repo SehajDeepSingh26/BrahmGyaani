@@ -10,6 +10,7 @@ import Footer from "../components/Common/Footer"
 import TimelineSection from "../components/Core/Homepage/TimelineSection"
 import LearningLanguageSection from "../components/Core/Homepage/LearningLanguageSection"
 import InstructorSection from "../components/Core/Homepage/InstructorSection"
+import ExploreMore from "../components/Core/Homepage/ExploreMore"
 
 
 
@@ -109,7 +110,7 @@ function Home() {
                 />
             </div>
 
-            {/* <ExploreMore /> */}
+            <ExploreMore />
         </div>
 
         {/* Section 2 */}
@@ -172,7 +173,7 @@ function Home() {
         {/* Section 4 */}
 
         {/* FOOTER */}
-        <Footer/>
+        {/* <Footer/> */}
 
 
     </div>
