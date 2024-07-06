@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 const User = require('../models/User.model')
 const OTP = require('../models/OTP.model')
 const Profile = require('../models/Profile.model')
 const otpGenerator = require("otp-generator")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const { response } = require('express')
+// const { response } = require('express')
 const mailSender = require("../utils/mailSender");
 require("dotenv").config()
 
@@ -12,19 +13,27 @@ require("dotenv").config()
 exports.sendOTP = async (req, res) => {
     try {
       const { email } = req.body;
+      console.log("email --------------------->", req.body)
+      if(!email)
+        return res.status(404).json({
+            success: false,
+            message: "Email not found"
+        })
       const checkuserpresent = await User.findOne({ email });
       if (checkuserpresent) {
         return res.status(400).json({
           status: false,
-          message: "USer already Exist",
+          message: "User already Exist",
         });
       }
+
       //generate otp
       var otp = otpGenerator.generate(6, {
         upperCaseAlphabets: false,
         lowerCaseAlphabets: false,
         specialChars: false,
       });
+      console.log("otp generated", otp);
       console.log("otp generated", otp);
   
       //check uniqueness of otp
@@ -42,7 +51,7 @@ exports.sendOTP = async (req, res) => {
       // console.log(otpPayload);
   
       //create an entry in db for otp
-      let otpbody = await OTP.create(otpPayload);
+      await OTP.create(otpPayload);
       //  return response
       return res.status(200).json({
         success: true,
@@ -245,7 +254,7 @@ exports.changePassword = async(req, res) => {
         }
 
         try {
-            const sendMail = mailSender(User.email, "Update Password", newPassword)
+            await mailSender(User.email, "Update Password", newPassword)
             console.log("Email sent successfully")
         } catch (error) {
             console.log("error occured while sending mail", error)

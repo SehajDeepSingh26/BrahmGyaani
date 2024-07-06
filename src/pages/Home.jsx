@@ -119,7 +119,7 @@ function Home() {
                 <div className="w-11/12 max-w-maxContent flex items-center gap-5 mx-auto  justify-center ">
                     <div className="  flex gap-7  text-white mt-[100px] ">
                         <div className=" flex gap-7    mt-[200px]">
-                            <CTAButton active={true} linkTo={"/ll"}>
+                            <CTAButton active={true} linkTo={"/login"}>
                                 <div className="flex items-center gap-2">
                                     Explore Full Catalog
                                     <FaArrowRight />

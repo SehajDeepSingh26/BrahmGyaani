@@ -6,7 +6,7 @@ import {NavbarLinks} from "../../data/navbar-links"
 import { Link, matchPath } from "react-router-dom"
 import { useLocation } from "react-router-dom" 
 import { TiShoppingCart } from "react-icons/ti";
-import {ProfileDropdown} from "../Core/auth/ProfileDropdown"
+// import {ProfileDropdown} from "../Core/auth/ProfileDropdown"
 import { useState, useEffect } from "react"
 import {apiConnector} from "../../services/apiConnector"
 import { categories } from "../../services/apis"
@@ -35,7 +35,7 @@ const Navbar = () => {
     useEffect( () => {
         fetchSubLinks();
     }, [subLinks.length])
-    console.log(subLinks)
+    // console.log(subLinks)
 
     const matchRoute = (route) => {
         return matchPath({path:route}, location.pathname)
@@ -112,16 +112,16 @@ const Navbar = () => {
                         )
                     }
                     {
-                        // token === null && (
-                        //     <Link to={"/signup"}>
-                        //         <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md  hover:scale-95">
-                        //             SignUp
-                        //         </button>
-                        //     </Link>
-                        // )
+                        token === null && (
+                            <Link to={"/signup"}>
+                                <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md  hover:scale-95">
+                                    SignUp
+                                </button>
+                            </Link>
+                        )
                     }
                     {
-                        token === null &&   <ProfileDropdown/>
+                        // token !== null &&   <ProfileDropdown/>
                         
                     }
                 </div>

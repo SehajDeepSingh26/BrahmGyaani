@@ -1,4 +1,4 @@
-const { Long } = require('mongodb');
+/* eslint-disable no-undef */
 const User = require('../models/User.model');
 const mailSender = require('../utils/mailSender')
 const bcrypt = require("bcrypt")
@@ -38,13 +38,14 @@ exports.resetPasswordToken = async(req, res) => {
                                             {new:true})     //^ returns the updated user to updateUser variable
     
         //^ send email containing the url
-        const url = `https://localhost:3000/update-password/${token}`
+        const url = `http://localhost:5173/update-password/${token}`
         mailSender(email, "Reset Password Link", `The Link for Reset Password: ${url}`)
     
         //^ send response
         return res.status(201).json({
             success: true,
-            message: "Password Reset Link sent to your email successfully, Please check"
+            message: "Password Reset Link sent to your email successfully, Please check",
+            updateUser
         })
     } catch (error) {
         console.log(error)
@@ -59,17 +60,17 @@ exports.resetPasswordToken = async(req, res) => {
 //& reset Password
 exports.resetPassword = async(req, res) => {
     try {
-        const {password, confirmPassword, token} = req.body      //^ token is sent into body from frontend
-    
+        const {password, confirmpassword, token} = req.body      //^ token is sent into body from frontend
+
         //^ validate user
-        if(!password || !confirmPassword || !token) {
+        if(!password || !confirmpassword || !token) {
             return res.status(401).json({
                 success: false,
                 message: "All fields are required"
             })
         }
 
-        if (confirmPassword !== password) {
+        if (confirmpassword !== password) {
 			return res.json({
 				success: false,
 				message: "Password and Confirm Password Does not Match",
@@ -82,7 +83,6 @@ exports.resetPassword = async(req, res) => {
             return res.status(402).json({
                 success: false,
                 message: "Invalid Token, please generate again",
-                error: error.message
             })
         }
 
@@ -99,7 +99,7 @@ exports.resetPassword = async(req, res) => {
         console.log(password)
 
         //^ Hash password
-        const pass = await bcrypt.hash(confirmPassword, 10)
+        const pass = await bcrypt.hash(confirmpassword, 10)
 
         //^ update password
         await User.findOneAndUpdate(

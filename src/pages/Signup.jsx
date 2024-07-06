@@ -1,5 +1,5 @@
 import signupImg from "../assets/Images/signup.webp"
-import Template from "../Components/core/HomePage/Auth/Template"
+import Template from "../components/Core/auth/Template"
 
 function Signup() {
     return (

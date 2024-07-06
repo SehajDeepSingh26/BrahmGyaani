@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const Profile = require("../models/Profile.model");
 const User = require("../models/User.model");
 const {uploadImageToCloudinary} = require("../utils/imageUploader")

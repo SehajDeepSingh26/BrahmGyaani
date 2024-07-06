@@ -5,10 +5,10 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-import { sendOtp } from "../../../../services/operations/authAPI"
-import { setSignupData } from "../../../../Slice/authSlice"
-import { ACCOUNT_TYPE } from "../../../../utils/constants"
-import Tab from "../../../common/Tab"
+import { sendOtp } from "../../../services/operations/authApi"
+import { setSignupData } from "../../../slice/authSlice"
+import { ACCOUNT_TYPE } from "../../../utils/constants"
+import Tab from "../../Common/Tab"
 
 function SignupForm() {
     const navigate = useNavigate()
@@ -29,6 +29,7 @@ function SignupForm() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
     const { firstName, lastName, email, password, confirmpassword } = formData
+    // console.log(formData)
 
     // Handle input fields, when some value changes
     const handleOnChange = (e) => {
@@ -40,32 +41,38 @@ function SignupForm() {
 
     // Handle Form Submission
     const handleOnSubmit = (e) => {
-        e.preventDefault()
-
-        if (password !== confirmpassword) {
-            toast.error("Passwords Do Not Match")
-            return
+        try {
+            e.preventDefault()
+    
+            if (password !== confirmpassword) {
+                toast.error("Passwords Do Not Match")
+                return
+            }
+            const signupData = {
+                ...formData,
+                accountType,
+            }
+    
+            // Setting signup data to state
+            // To be used after otp verification
+            dispatch(setSignupData(signupData))
+            
+            // Send OTP to user for verification
+            // console.log("email ------>", formData.email)
+            dispatch(sendOtp(formData.email, navigate))
+    
+            // Reset
+            setFormData({
+                firstName: "",
+                lastName: "",
+                email: "",
+                password: "",
+                confirmpassword: "",
+            })
+            setAccountType(ACCOUNT_TYPE.STUDENT)
+        } catch (error) {
+            console.log(error)
         }
-        const signupData = {
-            ...formData,
-            accountType,
-        }
-
-        // Setting signup data to state
-        // To be used after otp verification
-        dispatch(setSignupData(signupData))
-        // Send OTP to user for verification
-        dispatch(sendOtp(formData.email, navigate))
-
-        // Reset
-        setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            password: "",
-            confirmpassword: "",
-        })
-        setAccountType(ACCOUNT_TYPE.STUDENT)
     }
 
     // data to pass to Tab component

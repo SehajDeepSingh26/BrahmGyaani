@@ -1,5 +1,6 @@
 import loginImg from "../assets/Images/login.webp"
-import Template from "../Components/core/HomePage/Auth/Template"
+import Template from "../components/Core/auth/Template"
+
 
 function Login() {
     return (

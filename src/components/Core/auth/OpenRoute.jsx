@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 // This will prevent authenticated users from accessing this route
 import { useSelector } from "react-redux"

@@ -3,8 +3,8 @@
 import { useSelector } from "react-redux"
 
 import frameImg from "../assets/Images/frame.png"
-import LoginForm from "../Components/core/HomePage/Auth/LoginForm"
-import SignupForm from "../Components/core/HomePage/Auth/SignupForm"
+import LoginForm from "../components/Core/auth/LoginForm"
+import SignupForm from "../components/Core/auth/SignUpForm"
 
 function Template({ title, description1, description2, image, formType }) {
     const { loading } = useSelector((state) => state.auth)
