@@ -16,18 +16,18 @@ import ExploreMore from "../components/Core/Homepage/ExploreMore"
 
 function Home() {
   return (
-    <div>
+    <div className="mt-28">
         {/* Section - 1 */}
-        <div className="relative mx-auto   flex flex-col w-11/12 items-center text-white justify-between ">
+        <div className="relative mx-auto flex flex-col w-11/12 items-center text-white justify-between">
 
-            <Link to={"/signup"}>
-                <div className="group flex mt-16 mx-auto p-1   rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 hover:shadow-[0px_0px_10px_0px_rgba(255,255,255,1)]  ">
-                    <div className=" w-full flex  items-center justify-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
-                        <p>Become an Instructor</p>
-                        <FaArrowRight />
-                    </div>
+                <div className="group flex mt-5 mx-auto p-1 rounded-full bg-richblack-800 font-bold text-richblack-200 transition-all duration-200 hover:scale-95 hover:shadow-[0px_0px_10px_0px_rgba(255,255,255,1)]  ">
+                    <Link to={"/signup"}>
+                            <div className=" w-full flex  items-center justify-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
+                                <p>Become an Instructor</p>
+                                <FaArrowRight />
+                            </div>
+                    </Link>
                 </div>
-            </Link>
 
             <div className="text-center text-4xl font-semibold mt-7">
                 Empower your future with <HighlightText text={"Coding Skills"} />{" "}

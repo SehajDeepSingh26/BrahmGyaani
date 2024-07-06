@@ -6,10 +6,11 @@ import {NavbarLinks} from "../../data/navbar-links"
 import { Link, matchPath } from "react-router-dom"
 import { useLocation } from "react-router-dom" 
 import { TiShoppingCart } from "react-icons/ti";
-import profileDropdown from "../Core/auth/profileDropdown"
+import {ProfileDropdown} from "../Core/auth/ProfileDropdown"
 import { useState, useEffect } from "react"
 import {apiConnector} from "../../services/apiConnector"
 import { categories } from "../../services/apis"
+import { IoIosArrowDropdownCircle } from "react-icons/io"
 
 const Navbar = () => {
 
@@ -25,23 +26,22 @@ const Navbar = () => {
             const result = await apiConnector("GET", categories.CATEGORIES_API)   
             //^ this is how we call the api
             setSubLinks(result.data)
-            console.log(result.data.allCategory)
-            console.log("Priting SubLinks result: ", subLinks);
         } catch (error) {
             console.log("Could not fetch categories list", error)
-
+            
         }
     }
 
     useEffect( () => {
         fetchSubLinks();
-    }, [])
+    }, [subLinks.length])
+    console.log(subLinks)
 
     const matchRoute = (route) => {
         return matchPath({path:route}, location.pathname)
     }
     return (
-        <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 ">
+        <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 w-full fixed top-0">
             <div className="w-11/12 flex max-w-maxContent items-center justify-between">
                 <Link to="/">
                     <img src={logo} width={160} height={132}/>
@@ -53,8 +53,28 @@ const Navbar = () => {
                         {
                             NavbarLinks.map((link, index) => (
                                  <li key={index}>{
-                                    link.title === "Catalog" ?(<div>
+                                    link.title === "Catalog" ?(
+                                    <div className="relative group flex items-center gap-2">
                                         <p>{link.title}</p>
+                                        <IoIosArrowDropdownCircle/>
+                                        {/* //^ draw shape for categories when hovered (rotated sqaure + rectangle) */}
+                                        <div className="invisible absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[10%] flex flex-col rounded-md bg-richblack-5 p-4 opacity-0 text-richblack-900  transition-all duration-200 group-hover:visible group-hover:opacity-100 lg:w-[300px] ">
+                                            <div className="absolute left-[50%] top-0 h-6 w-6 rotate-45 rounded bg-richblack-5 translate-y-[-40%] translate-x-[80%] ">
+                                            </div>
+
+                                            {
+                                                subLinks ? 
+                                                    subLinks.allCategory?.map((category, count) => (
+                                                        <Link key={count} to={`/category/${category.name}`}>
+                                                            {category.name}
+                                                        </Link>
+                                                    ))
+                                                : (<div></div>)
+                                            }
+                                        </div>
+
+
+
                                     </div>) : 
                                         <Link to={link?.path}>
                                             <p className={`${matchRoute(link?.path) ? "text-yellow-25": "text-richblack-25"}`}>{link.title}</p>
@@ -92,16 +112,16 @@ const Navbar = () => {
                         )
                     }
                     {
-                        token === null && (
-                            <Link to={"/signup"}>
-                                <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md  hover:scale-95">
-                                    SignUp
-                                </button>
-                            </Link>
-                        )
+                        // token === null && (
+                        //     <Link to={"/signup"}>
+                        //         <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md  hover:scale-95">
+                        //             SignUp
+                        //         </button>
+                        //     </Link>
+                        // )
                     }
                     {
-                        token !== null &&   <profileDropdown/>
+                        token === null &&   <ProfileDropdown/>
                         
                     }
                 </div>
