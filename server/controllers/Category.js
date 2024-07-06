@@ -1,5 +1,6 @@
+/* eslint-disable no-undef */
 const Category = require("../models/Category.model");
-const Course = require("../models/Course.model");
+// const Course = require("../models/Course.model");
 
 //& create Category Handler
 exports.createCategory = async(req, res) => {

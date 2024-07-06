@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 const express = require("express");
 const app = express();
 
@@ -31,7 +33,7 @@ dbConnect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-       origin:"http://localhost:3000",      //^ frontend link
+       origin:"http://localhost:5173",      //^ frontend link
        credentials:true,
 }))
 
