@@ -16,7 +16,7 @@ import ExploreMore from "../components/Core/Homepage/ExploreMore"
 
 function Home() {
   return (
-    <div className="mt-28">
+    <div className="mt-20 relative z-10">
         {/* Section - 1 */}
         <div className="relative mx-auto flex flex-col w-11/12 items-center text-white justify-between">
 

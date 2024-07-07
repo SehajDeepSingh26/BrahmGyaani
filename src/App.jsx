@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./pages/Home"
+import About from "./pages/About"
 // import "./App.css"
 import Navbar from "./components/Common/Navbar"
 import Login from "./pages/Login"
@@ -17,44 +18,41 @@ function App() {
         <Navbar/>
         <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="/about" element={<About/>} />
+
             <Route
                 path="signup" element={
                     <OpenRoute>
                     <Signup />
-                    </OpenRoute>
-                }
+                    </OpenRoute>}
                 />
             <Route
                 path="login"
                 element={
                     <OpenRoute>
                     <Login />
-                    </OpenRoute>
-                }
+                    </OpenRoute>}
                 />
             <Route
                 path="forgot-password"
                 element={
                     <OpenRoute>
                     <ForgotPassword />
-                    </OpenRoute>
-                }
+                    </OpenRoute>}
                 />
             <Route
                 path="update-password/:id"
                 element={
                     <OpenRoute>
                     <UpdatePassword />
-                    </OpenRoute>
-                }
+                    </OpenRoute>}
                 />
             <Route
                 path="verify-email/"
                 element={
                     <OpenRoute>
                     <VerifyEmail />
-                    </OpenRoute>
-                }
+                    </OpenRoute>}
                 />
         </Routes>
     </div>

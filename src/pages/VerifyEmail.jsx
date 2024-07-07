@@ -13,6 +13,7 @@ const VerifyEmail = () => {
     const [otp, setOtp] = useState("");
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const resend = true;
 
     useEffect(() => {
         if (!signupData) {
@@ -52,7 +53,7 @@ const VerifyEmail = () => {
                 <div>Loading...</div>
             ) : (
                 <div className="text-richblack-25 flex flex-col items-center justify-center bg-richblack-800">
-                    <div className="text-xl font-bold border-2 border-gray-300 p-4 rounded-lg shadow-md hover: ">Verify Email</div>
+                    <div className="text-xl font-bold border-2 border-richblack-100 p-4 rounded-lg shadow-md hover: ">Verify Email</div>
                     <br />
                     <p>A verification code has been sent to you. Enter the code below</p>
                     <br />
@@ -78,17 +79,26 @@ const VerifyEmail = () => {
                                 gap: "0 6px",
                             }}
                         />
-                        <button type="submit">Verify Email</button>
+                        <div className="flex  justify-center mb-3 mt-3">
+                            <button
+                            type="submit"
+                            className="border-2 border-richblack-100 font-bold p-3 transition-transform duration-200 transform hover:scale-95">
+                                Verify Email
+                            </button>
+                        </div>
                     </form>
-                    <div>
+                    <div className="flex items-center space-x-4">
                         <Link to="/login">
-                            <p>Back to Login</p>
+                        <p className="border-2 border-richblack-100 font-bold p-3 mt-5 transition-transform duration-200 transform hover:scale-95 text-sm">Back to Login</p>
                         </Link>
+                        <button
+                        type="submit"
+                        className="border-2 border-richblack-100 font-bold p-3 mt-5 transition-transform duration-200 transform hover:scale-95 text-sm"
+                        onClick={() => dispatch(sendOtp(signupData.email, navigate))}
+                        >
+                        Resend OTP
+                        </button>
                     </div>
-
-                    <button onClick={() => dispatch(sendOtp(signupData.email))}>
-                        Resend it
-                    </button>
                 </div>
             )}
         </div>
