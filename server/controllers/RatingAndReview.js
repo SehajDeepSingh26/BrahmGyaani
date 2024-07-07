@@ -1,6 +1,5 @@
 const RatingReview = require("../models/RatingAndReview.model")
 const Course = require("../models/Course.model");
-const { default: mongoose } = require("mongoose");
 
 //& Create rating
 exports.createRating = async(req, res) => {

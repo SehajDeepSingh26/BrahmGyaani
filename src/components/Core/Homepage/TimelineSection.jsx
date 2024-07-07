@@ -51,7 +51,7 @@ const TimelineSection = () => {
                                 </div>
 
                             </div>
-                            <div className='flex flex-cols leading-none pt-0'>
+                            <div className={`flex flex-cols leading-none pt-0 ${index===3?"invisible": ""}`} key={index}>
                                 <div>.</div>
                                 <div>.</div>
                                 <div>.</div>

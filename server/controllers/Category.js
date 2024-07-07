@@ -1,4 +1,4 @@
-/* eslint-disable no-undef */
+
 const Category = require("../models/Category.model");
 // const Course = require("../models/Course.model");
 
@@ -77,7 +77,7 @@ exports.categoryPageDetails = async(req, res) => {
                 succcess: false,
                 message: "Category Not found!"
             })
-        console.log(selectedCategory)
+        // console.log(selectedCategory)
 
         //^ Show Recommended Courses (other than selected)
         const recommendedCategory = await Category.find({
