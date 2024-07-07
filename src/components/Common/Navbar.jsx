@@ -6,7 +6,7 @@ import {NavbarLinks} from "../../data/navbar-links"
 import { Link, matchPath } from "react-router-dom"
 import { useLocation } from "react-router-dom" 
 import { TiShoppingCart } from "react-icons/ti";
-// import {ProfileDropdown} from "../Core/auth/ProfileDropdown"
+import  ProfileDropdown  from '/src/components/Core/auth/ProfileDropdown.jsx';
 import { useState, useEffect } from "react"
 import {apiConnector} from "../../services/apiConnector"
 import { categories } from "../../services/apis"
@@ -121,7 +121,7 @@ const Navbar = () => {
                         )
                     }
                     {
-                        // token !== null &&   <ProfileDropdown/>
+                        token !== null &&   <ProfileDropdown/>
                         
                     }
                 </div>

@@ -71,20 +71,21 @@ exports.sendOTP = async (req, res) => {
 exports.signUp = async(req, res) => {
     try {
         const {
-            firstName, lastName, email, password, confirmPassword, accountType, contactNumber, otp
+            firstName, lastName, email, password, confirmpassword, accountType, contactNumber, otp
         } = req.body
+        console.log(req.body)
     
                     //^ validate data
-        if(!firstName || !lastName || !email || !password || !confirmPassword || !accountType || !otp)
+        if(!firstName || !lastName || !email || !password || !confirmpassword || !accountType || !otp)
             return res.status(403).json({
                 success: false,
                 message: "All fields are required"
             })
         
-        if(password !== confirmPassword)
+        if(password !== confirmpassword)
             return res.status(400).json({
                 success: false,
-                message: "Password and confirmPassword do not match"
+                message: "Password and confirmpassword do not match"
             })
         
                     //^ check existence of user
@@ -104,13 +105,14 @@ exports.signUp = async(req, res) => {
 			// OTP not found for the email
 			return res.status(400).json({
 				success: false,
-				message: "The OTP is not valid",
+				message: "Enter OTP",
 			});
 		} else if (otp !== response[0].otp) {
 			// Invalid OTP
 			return res.status(400).json({
 				success: false,
 				message: "The OTP is not valid",
+                redirect: "/verify-email" 
 			});
 		}
         
@@ -220,9 +222,9 @@ exports.login =  async(req, res) => {
 //& changePassword
 exports.changePassword = async(req, res) => {
     try {
-        const {email, password, newPassword, confirmPassword} = req.body
+        const {email, password, newPassword, confirmpassword} = req.body
     
-        if(!email || !password|| !newPassword|| !confirmPassword)
+        if(!email || !password|| !newPassword|| !confirmpassword)
             return res.status(403).json({
                 success: false,
                 message: "All fields are required!!"
@@ -235,10 +237,10 @@ exports.changePassword = async(req, res) => {
                 message: "Invalid email id !!"
             })
     
-        if(newPassword !== confirmPassword)
+        if(newPassword !== confirmpassword)
             return res.status(403).json({
                 success: false,
-                message: "Password and confirmPassword do not match !!"
+                message: "Password and confirmpassword do not match !!"
             })
         
         if(await bcrypt.compare(newPassword, user.password)){

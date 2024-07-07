@@ -1,53 +1,26 @@
-/* eslint-disable react/prop-types */
-// import { FcGoogle } from "react-icons/fc"
-import { useSelector } from "react-redux"
+import { useEffect } from "react";
 
-import frameImg from "../assets/Images/frame.png"
-import LoginForm from "../components/Core/auth/LoginForm"
-import SignupForm from "../components/Core/auth/SignUpForm"
+// This hook detects clicks outside of the specified component and calls the provided handler function.
+export default function useOnClickOutside(ref, handler) {
+    useEffect(() => {
+        // Define the listener function to be called on click/touch events
+        const listener = (event) => {
+            // If the click/touch event originated inside the ref element, do nothing
+            if (!ref.current || ref.current.contains(event.target)) {
+                return;
+            }
+            // Otherwise, call the provided handler function
+            handler(event);
+        };
 
-function Template({ title, description1, description2, image, formType }) {
-    const { loading } = useSelector((state) => state.auth)
+        // Add event listeners for mousedown and touchstart events on the document
+        document.addEventListener("mousedown", listener);
+        document.addEventListener("touchstart", listener);
 
-    return (
-        <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
-            {loading ? (
-                <div className="spinner"></div>
-            ) : (
-                <div className="mx-auto flex w-11/12 max-w-maxContent flex-col-reverse justify-between gap-y-12 py-12 md:flex-row md:gap-y-0 md:gap-x-12">
-                    <div className="mx-auto w-11/12 max-w-[450px] md:mx-0">
-                        <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">
-                            {title}
-                        </h1>
-                        <p className="mt-4 text-[1.125rem] leading-[1.625rem]">
-                            <span className="text-richblack-100">{description1}</span>{" "}
-                            <span className="font-edu-sa font-bold italic text-blue-100">
-                                {description2}
-                            </span>
-                        </p>
-                        {formType === "signup" ? <SignupForm /> : <LoginForm />}
-                    </div>
-                    <div className="relative mx-auto w-11/12 max-w-[450px] md:mx-0">
-                        <img
-                            src={frameImg}
-                            alt="Pattern"
-                            width={558}
-                            height={504}
-                            loading="lazy"
-                        />
-                        <img
-                            src={image}
-                            alt="Students"
-                            width={558}
-                            height={504}
-                            loading="lazy"
-                            className="absolute -top-4 right-4 z-10"
-                        />
-                    </div>
-                </div>
-            )}
-        </div>
-    )
+        // Cleanup function to remove the event listeners when the component unmounts or when the ref/handler dependencies change
+        return () => {
+            document.removeEventListener("mousedown", listener);
+            document.removeEventListener("touchstart", listener);
+        };
+    }, [ref, handler]); // Only run this effect when the ref or handler function changes
 }
-
-export default Template

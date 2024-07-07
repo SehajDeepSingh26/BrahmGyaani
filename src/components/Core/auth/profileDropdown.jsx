@@ -7,7 +7,6 @@ import { Link, useNavigate } from "react-router-dom";
 import useOnClickOutside from "../../../hooks/UseOnClickOutside";
 import { logout } from "../../../services/operations/authApi";
 
-
 const ProfileDropdown = () => {
     const { user } = useSelector((state) => state.profile);
     const dispatch = useDispatch();
@@ -55,6 +54,6 @@ const ProfileDropdown = () => {
             )}
         </button>
     );
-}
-
-export default ProfileDropdown;
+  };
+  
+  export default ProfileDropdown;
