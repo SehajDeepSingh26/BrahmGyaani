@@ -11,18 +11,24 @@ const authSlice = createSlice({
     initialState: initialState,
     reducers: {
         setToken(state, value){     //^ action ~ value
-            state.token = value.payload;
+            const token = value.payload;
+            state.token = token;
+            localStorage.setItem("token", JSON.stringify(token));
         },
         setLoading(state, value){
             state.loading= value.payload
         },
         setSignupData(state, value){
             state.signupData = value.payload
+        },
+        logout(state) {
+            state.token = null;
+            localStorage.removeItem("token");
         }
     },
 })
 
-export const {setToken,setLoading, setSignupData} = authSlice.actions;
+export const {setToken,setLoading, setSignupData, logout} = authSlice.actions;
 export const authReducer = authSlice.reducer;
 // export default authSlice.reducer;
 

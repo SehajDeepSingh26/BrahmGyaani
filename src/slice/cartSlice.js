@@ -7,7 +7,9 @@ const initialState = {
     total: localStorage.getItem("total")
         ? JSON.parse(localStorage.getItem("total"))
         : 0,
-    totalItems: localStorage.getItem("totalItems") ? JSON.parse(localStorage.getItem("totalItems")) : 0
+    totalItems: localStorage.getItem("totalItems") ? JSON.parse(localStorage.getItem("totalItems")) : 0,
+    loading: false,
+
 }
 
 const cartSlice = createSlice({
@@ -61,7 +63,10 @@ const cartSlice = createSlice({
             localStorage.removeItem("total")
             localStorage.removeItem("totalItems")
         },
+        setLoading(state, value){
+            state.loading= value.payload
+        },
     },
 })
-export const { addToCart, removeFromCart, resetCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, resetCart, setLoading } = cartSlice.actions;
 export const cartReducer = cartSlice.reducer

@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    user: null,
+    loading: false,
+    user: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
+
+
 };
 
 const profileSlice = createSlice({
@@ -10,10 +13,14 @@ const profileSlice = createSlice({
     reducers: {
         setUser(state, action){     //^ action ~ value
             state.user = action.payload;
+            localStorage.setItem("user", JSON.stringify(action.payload));
+        },
+        setLoading(state, value){
+            state.loading= value.payload
         },
     },
 })
 
-export const {setUser} = profileSlice.actions;
+export const {setUser, setLoading} = profileSlice.actions;
 export const profileReducer = profileSlice.reducer;
 // export default authSlice.reducer;

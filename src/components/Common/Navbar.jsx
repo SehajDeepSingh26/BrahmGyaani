@@ -1,16 +1,18 @@
 /* eslint-disable no-unused-vars */
 // import React from 'react'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import logo from "../../assets/Logo/Logo-Full-Light.png"
 import {NavbarLinks} from "../../data/navbar-links"
-import { Link, matchPath } from "react-router-dom"
+import { Link, matchPath, useNavigate } from "react-router-dom"
 import { useLocation } from "react-router-dom" 
 import { TiShoppingCart } from "react-icons/ti";
-import  ProfileDropdown  from '/src/components/Core/auth/ProfileDropdown.jsx';
+import  ProfileDropdown  from '../Core/auth/ProfileDropdown';
 import { useState, useEffect } from "react"
 import {apiConnector} from "../../services/apiConnector"
 import { categories } from "../../services/apis"
 import { IoIosArrowDropdownCircle } from "react-icons/io"
+
+import {logout} from "../../services/operations/authApi"
 
 const Navbar = () => {
 
@@ -35,11 +37,14 @@ const Navbar = () => {
     useEffect( () => {
         fetchSubLinks();
     }, [subLinks.length])
-    // console.log(subLinks)
 
     const matchRoute = (route) => {
         return matchPath({path:route}, location.pathname)
     }
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     return (
         <div className="flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 w-full fixed top-0 z-30">
             <div className="w-11/12 flex max-w-maxContent items-center justify-between">
@@ -78,10 +83,9 @@ const Navbar = () => {
                                         </Link>
                                     }
                                 </li>
-                            ))
-                            
+                            ))               
                         }
-
+                        
                     </ul>
                 </nav>
 
@@ -89,7 +93,7 @@ const Navbar = () => {
                 <div className="flex gap-4 items-center text-white">
                     {
                         user && user?.accountType != "Instructor" && (
-                            <Link to={"/dashboard/cart"} className="relative">
+                            <Link to={"/dashboard/cart"} className="">
                                 <TiShoppingCart />
                                 {
                                     totalItems>0 && (
@@ -99,28 +103,22 @@ const Navbar = () => {
                             </Link>
                         ) 
                     }
-                    {
-                        token === null && (
-                            <Link to={"/login"}>
-                                <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md  hover:scale-95">
+                    {token === null ? (
+                        <>
+                            <Link to="/login">
+                                <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md hover:scale-95">
                                     LogIn
                                 </button>
                             </Link>
-                        )
-                    }
-                    {
-                        token === null && (
-                            <Link to={"/signup"}>
-                                <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md  hover:scale-95">
+                            <Link to="/signup">
+                                <button className="border border-richblack-700 bg-richblack-800 text-richblack-25 p-1 px-4 rounded-md hover:scale-95">
                                     SignUp
                                 </button>
                             </Link>
-                        )
-                    }
-                    {
-                        token !== null &&   <ProfileDropdown/>
-                        
-                    }
+                        </>
+                    ) : (
+                        <ProfileDropdown />
+                    )}
                 </div>
             </div>
         </div>

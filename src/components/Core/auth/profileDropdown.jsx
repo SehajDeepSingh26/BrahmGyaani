@@ -20,6 +20,7 @@ const ProfileDropdown = () => {
 
     return (
         <button className="relative" onClick={() => setOpen(true)}>
+            {/* {console.log("user--->", user)} */}
             <div className="flex items-center gap-x-1">
                 <img
                     src={user?.image}
