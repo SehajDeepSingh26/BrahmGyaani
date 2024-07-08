@@ -9,6 +9,7 @@ import OpenRoute from "./components/Core/auth/OpenRoute"
 import ForgotPassword from "./pages/ForgotPassword"
 import UpdatePassword from "./pages/UpdatePassword"
 import VerifyEmail from "./pages/VerifyEmail"
+import Dashboard from "./pages/Dashboard"
 
 
 function App() {
@@ -53,6 +54,14 @@ function App() {
                     <OpenRoute>
                     <VerifyEmail />
                     </OpenRoute>}
+                />
+            <Route
+                path="dashboard/my-profile"
+                element={
+                    // <OpenRoute>
+                        <Dashboard />
+                    // </OpenRoute>
+                    }
                 />
         </Routes>
     </div>
