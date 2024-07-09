@@ -50,12 +50,10 @@ const MyProfile = () => {
             <div className="p-6 bg-richblack-800 shadow-md rounded-lg">
                 <div className="flex flex-col gap-3 items-start">
                     <div className="flex flex-row gap-10 items-center justify-between w-full">
-                        <div>
-                            <p className="text-xl font-semibold text-richblack-5">About</p>
-                            <p className="text-sm text-richblack-50">
-                                {user?.additionalDetails?.about ? user?.additionalDetails?.about : "Something About Yourself"}
-                            </p>
-                        </div>
+                        <p className="text-xl font-semibold text-richblack-5">About</p>
+                        <p className="text-sm text-richblack-50">
+                            {user?.additionalDetails?.about ? user?.additionalDetails?.about : "Something About Yourself"}
+                        </p>
                         <div className="flex items-center gap-3">
                             <button
                                 onClick={() => navigate("/dashboard/settings")}
@@ -73,11 +71,15 @@ const MyProfile = () => {
             <div className="p-6 bg-richblack-800 shadow-md rounded-lg">
                 <div className="flex flex-row gap-10 items-center justify-between mb-6">
                     <p className="text-xl font-semibold text-richblack-5">Personal Details</p>
-                    <IconBtn
-                        text={"Edit"}
-                        onclick={() => navigate("/dashboard/settings")}
-                        customClasses="flex items-center gap-2 bg-richblack-5 hover:bg-richblack-200 text-richblack-800 py-2 px-4 rounded-md"
-                    />
+                    <div className="flex items-center gap-3">
+                        <button
+                            onClick={() => navigate("/dashboard/settings")}
+                            className="flex items-center gap-2 bg-richblack-5 hover:bg-richblack-200 text-richblack-800 py-2 px-4 rounded-md"
+                        >
+                            <span>Edit</span>
+                            <FiEdit />
+                        </button>
+                    </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
