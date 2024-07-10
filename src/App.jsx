@@ -16,9 +16,11 @@ import Error from "./pages/Error"
 import EnrolledCourses from "./components/Core/Dashboard/EnrolledCourses"
 import PurchaseHistory from "./components/Core/Dashboard/PurchaseHistory"
 import Settings from "./components/Core/Dashboard/settings"
+import Cart from "./components/Core/Dashboard/Cart"
+import { useSelector } from "react-redux"
 
 function App() {
-
+    const {user} = useSelector((state) => state.profile)
     return (
         <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
             <Navbar />
@@ -62,18 +64,26 @@ function App() {
                 />
 
                 <Route element={
-                        <PrivateRoute>
-                            <Dashboard />
-                        </PrivateRoute>
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
                 } >
 
-                    <Route path="dashboard/my-profile" element={ <MyProfile />} />
+                    <Route path="dashboard/my-profile" element={<MyProfile />} />
 
-                    <Route path="dashboard/enrolled-courses" element={ <EnrolledCourses />} />
+                    <Route path="dashboard/settings" element={<Settings />} />
 
-                    <Route path="dashboard/purchase-history" element={ <PurchaseHistory />} />
-                    
-                    <Route path="dashboard/settings" element={ <Settings />} />
+                    {
+                        user?.accountType === "Student" && (
+                            <>
+                                <Route path="dashboard/cart" element={<Cart />} />
+
+                                <Route path="dashboard/enrolled-courses" element={<EnrolledCourses />} />
+
+                                <Route path="dashboard/purchase-history" element={<PurchaseHistory />} />
+                            </>
+                        )
+                    }
 
                 </Route>
 
