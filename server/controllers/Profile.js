@@ -14,7 +14,7 @@ exports.updateProfile = async(req, res) => {
         ^   6. retun res
         */
 
-        const {dateOfBirth="", about="", contactNumber, gender} = req.body
+        const {dateOfBirth="", about="", contactNumber, gender, firstName, lastName} = req.body
         const userId = req.user.id   
 
         if(!userId) {
@@ -29,12 +29,15 @@ exports.updateProfile = async(req, res) => {
 
         const profileDetails = await Profile.findById(profileId)
 
+        userDetail.firstName = firstName
+        userDetail.lastName = lastName
         profileDetails.dateOfBirth = dateOfBirth
         profileDetails.gender = gender
         profileDetails.about = about
         profileDetails.contactNumber = contactNumber
 
         await profileDetails.save()
+        userDetail.save()
 
         return res.status(200).json({
             success: true,

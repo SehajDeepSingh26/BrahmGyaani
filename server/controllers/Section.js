@@ -50,7 +50,7 @@ exports.createSection = async(req, res) => {
 
 exports.updateSection = async(req, res) => {
     try {
-        console.log(req.data)
+        
         const {sectionName, sectionId} = req.body;
 
         if(!sectionName || !sectionId){

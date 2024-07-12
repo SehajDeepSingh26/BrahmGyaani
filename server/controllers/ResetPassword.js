@@ -14,7 +14,7 @@ exports.resetPasswordToken = async(req, res) => {
                 message: "Enter email address"
             })
         }
-        console.log(email);
+        // console.log(email);
     
         //^ verify user
         const user = await User.find({email:email})
@@ -95,8 +95,6 @@ exports.resetPassword = async(req, res) => {
                 })
             }
         }
-        console.log(userDetail.password)
-        console.log(password)
 
         //^ Hash password
         const pass = await bcrypt.hash(confirmpassword, 10)

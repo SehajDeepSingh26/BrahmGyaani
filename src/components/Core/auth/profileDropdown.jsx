@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import useOnClickOutside from "../../../hooks/UseOnClickOutside";
 import { logout } from "../../../services/operations/authApi";
+import ConfirmationModal from "../../Common/ConfirmationModal";
 
 const ProfileDropdown = () => {
     const { user } = useSelector((state) => state.profile);
@@ -15,6 +16,8 @@ const ProfileDropdown = () => {
     const ref = useRef(null);
 
     useOnClickOutside(ref, () => setOpen(false));
+
+    const [confirmationmodal, setConfirmationmodal] = useState(null);
 
     if (!user) return null;
 
@@ -41,19 +44,32 @@ const ProfileDropdown = () => {
                             Dashboard
                         </div>
                     </Link>
-                    <div
-                        onClick={() => {
-                            dispatch(logout(navigate));
-                            setOpen(false);
-                        }}
+                    <button
+                        // onClick={() => {
+                        //     dispatch(logout(navigate));
+                        //     setOpen(false);
+                        // }}
+                        onClick={ () => setConfirmationmodal(
+                            {
+                                text1: "Are you sure?",
+                                text2: "Logout ho jaaoge !?",
+                                btn1Text: "Logout",
+                                btn2Text: "Cancel",
+                                btn1Handler: () => dispatch(logout(navigate)),
+                                btn2Handler: () => setConfirmationmodal(null)
+                            }
+                        )}
                         className="flex w-full items-center gap-x-1 py-[10px] px-[12px] text-sm text-richblack-100 hover:bg-richblack-700 hover:text-richblack-25"
                     >
                         <VscSignOut className="text-lg" />
                         Logout
-                    </div>
+                    </button>
+                    
+                    {confirmationmodal && <ConfirmationModal modalData={confirmationmodal} />}
                 </div>
             )}
         </button>
+
     );
   };
   

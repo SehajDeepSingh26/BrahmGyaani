@@ -29,9 +29,9 @@ exports.createCourse =  async(req, res) => {
         if(!instructorDetail)
             return res.status(401).json({
                 success: false,
-                message: "Instructur detail not found"
+                message: "Instructor detail not found"
             })            
-        console.log(instructorDetail)
+        // console.log(instructorDetail)
             
         const categoryDetail = await Category.findById(category)
         if(!categoryDetail)

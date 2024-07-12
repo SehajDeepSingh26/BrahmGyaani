@@ -2,7 +2,7 @@ import React from 'react';
 import IconBtn from './IconBtn';
 
 const ConfirmationModal = ({ modalData }) => {
-    console.log(modalData);
+    // console.log(modalData);
     try {
         return (
             <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -11,10 +11,10 @@ const ConfirmationModal = ({ modalData }) => {
 
                 {/* Modal content */}
                 <div className="bg-richblack-100 p-6 rounded shadow-lg flex flex-col gap-4 max-w-sm mx-4 relative z-10">
-                    <p className="text-lg font-semibold">
+                    <p className="text-lg font-semibold text-richblack-800">
                         {modalData?.text1}
                     </p>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 text-richblack-800">
                         {modalData?.text2}
                     </p>
                     <div className="flex flex-row gap-3 mt-4">
@@ -33,7 +33,7 @@ const ConfirmationModal = ({ modalData }) => {
             </div>
         );
     } catch (error) {
-        console.log("error-------------------------------", error);
+        console.log("Error in ConfirmationModal", error);
         return null; // Render nothing or an error message
     }
 };
