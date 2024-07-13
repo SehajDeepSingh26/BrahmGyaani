@@ -60,7 +60,7 @@ export default function RequirementsField({
                     Add
                 </button>
             </div>
-            {requirementsList.length > 0 && (
+            {requirementsList?.length > 0 && (
                 <ul className="mt-2 list-inside list-disc">
                     {requirementsList.map((requirement, index) => (
                         <li key={index} className="flex items-center text-richblack-5">

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const IconBtn = ({text, onclick, disabled, outline=false, customClasses, type}) => {
+const IconBtn = ({text, onclick, disabled, outline=false, customClasses, type, children}) => {
     // {console.log(text, children)}
   return (
     <button
@@ -11,7 +11,11 @@ const IconBtn = ({text, onclick, disabled, outline=false, customClasses, type}) 
                 ${disabled ? 'opacity-50 cursor-not-allowed' : 'transition duration-300 ease-in-out transform hover:scale-105'}
                 ${customClasses}`}
      >
+        <div className="flex flex-row gap-x-2">
             {text}
+            {children}
+
+        </div>
     </button>
   )
 }

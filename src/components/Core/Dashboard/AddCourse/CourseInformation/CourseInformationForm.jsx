@@ -307,7 +307,7 @@ export default function CourseInformationForm() {
                     disabled={loading}
                     text={!editCourse ? "Next" : "Save Changes"}
                 >
-                    <MdNavigateNext />
+                    <MdNavigateNext className="translate-y-2"/>
                 </IconBtn>
             </div>
         </form>
