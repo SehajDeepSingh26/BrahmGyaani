@@ -19,9 +19,22 @@ import Settings from "./components/Core/Dashboard/settings/Index"
 import Cart from "./components/Core/Dashboard/Cart"
 import { useSelector } from "react-redux"
 import AddCourse from "./components/Core/Dashboard/AddCourse"
+import toast from "react-hot-toast"
 
 function App() {
     const {user} = useSelector((state) => state.profile)
+
+    //^ Session TimeOut
+    var now = new Date().getTime();
+    var setupTime = localStorage.getItem('setupTime');
+    if(now-setupTime > 8*60*60*1000 && localStorage.getItem("token") !== null) {
+        localStorage.clear()
+        toast.error("Session Timeed Out, Please Login Again !!")
+        
+        location.reload(true);
+    }
+    
+    
     return (
         <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter ">
             <Navbar />
