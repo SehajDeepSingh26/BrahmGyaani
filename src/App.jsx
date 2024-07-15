@@ -27,7 +27,7 @@ function App() {
     //^ Session TimeOut
     var now = new Date().getTime();
     var setupTime = localStorage.getItem('setupTime');
-    if(now-setupTime > 8*60*60*1000 && localStorage.getItem("token") !== null) {
+    if(now-setupTime > 2*60*60*1000 && localStorage.getItem("token") !== null) {
         localStorage.clear()
         toast.error("Session Timeed Out, Please Login Again !!")
         

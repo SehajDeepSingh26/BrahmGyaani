@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 import { IoAddCircleOutline } from "react-icons/io5"
@@ -28,9 +28,9 @@ export default function CourseBuilderForm() {
     const { course } = useSelector((state) => state.course)
     const { token } = useSelector((state) => state.auth)
     const [loading, setLoading] = useState(false)
-    const [editSectionName, setEditSectionName] = useState(true)
+    const [editSectionName, setEditSectionName] = useState(false)
     const dispatch = useDispatch()
-
+    
     // handle form submission
     const onSubmit = async (data) => {
         // console.log(data)
@@ -49,7 +49,6 @@ export default function CourseBuilderForm() {
             )
             // console.log("edit", result)
         } else {
-            console.log("before..")
             result = await createSection(
                 {
                     sectionName: data.sectionName,
@@ -57,7 +56,6 @@ export default function CourseBuilderForm() {
                 },
                 token
             )
-            console.log("--------------->>", result)
         }
         
         if (result) {
@@ -101,6 +99,7 @@ export default function CourseBuilderForm() {
         dispatch(setEditCourse(true))
     }
 
+
     return (
         <div className="space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6">
             <p className="text-2xl font-semibold text-richblack-5">Course Builder</p>
@@ -142,10 +141,10 @@ export default function CourseBuilderForm() {
                     )}
                 </div>
             </form>
-            {console.log(course)}
-            {course.courseContent.length > 0 && (
+            {(course.courseContent.length > 0) && (
                 <NestedView handleChangeEditSectionName={handleChangeEditSectionName} />
             )}
+
             {/* Next Prev Button */}
             <div className="flex justify-end gap-x-3">
                 <button

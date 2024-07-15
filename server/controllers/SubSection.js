@@ -15,10 +15,10 @@ exports.createSubSection = async(req, res) => {
         ^   7. return response
         */
 
-        const {sectionId, title, timeDuration, description} = req.body;
-        const video = req.files.videoFile;
+        const {sectionId, title, description} = req.body;
+        const video = req.files.video;
 
-        if(!sectionId || !title || !timeDuration || !description || !video ) { 
+        if(!sectionId || !title || !description || !video ) { 
             return res.status(400).json({
                 success: false,
                 message: " All fields are required",
@@ -29,8 +29,8 @@ exports.createSubSection = async(req, res) => {
 
         const newSubSection = await SubSection.create({
             title: title, 
-            timeDuration: timeDuration,
             description: description,
+            timeDuration: `${uploadDetails.furation}`,
             videoUrl: uploadDetails.secure_url
         })
 
@@ -52,7 +52,7 @@ exports.createSubSection = async(req, res) => {
         return res.status(200).json({
             success: true,
             message: " SubSection added successfully",
-            UpdatedSection: subSectionDetail
+            data: subSectionDetail
         })
     } catch (error) {
         console.log(error);
@@ -72,47 +72,45 @@ exports.updateSubSection = async(req, res) => {
         //^ 4. update subSection's thumbnail, name, title, desc, etc
         //^ 5. return res
     
-        const {title, description, timeDuration} = req.body;
-        const {subSectionId} = req.body
-        const video = req.files.videoFile
-    
-        if(!title || !description || !timeDuration)
-            return res.status(400).json({
-                success: false,
-                message: "Alll fields required"})
+        const {title, description, sectionId, subSectionId} = req.body;
         
-        const newSubSection = await SubSection.findById(subSectionId);
+        let newSubSection = await SubSection.findById(subSectionId);
         if(!newSubSection)
             return res.status(400).json({
                 success: false,
                 message: "SubSection not found"})
+        
+        if(title !== undefined)
+            newSubSection.title = title
+        if(description !== undefined)
+            newSubSection.description = description
 
-        if (video) {
+        if (req.files && req.files.video !== undefined ) {
+            const video = req.files.video
             const uploadDetails = await uploadImageToCloudinary(
                 video,
                 process.env.FOLDER_NAME
             );
-            newSubSection = {
-                ...newSubSection,
-                VideoUrl: uploadDetails.secure_url,
-            };
+            newSubSection.videoUrl = uploadDetails.secure_url
+            newSubSection.timeDuration = `${uploadDetails.duration}`
         }
 
-        const newSubSectionDetail = await SubSection.findByIdAndUpdate(subSectionId, 
-                    {description: description, timeDuration: timeDuration, title: title},
-                    {new: true}
-        );
+        await newSubSection.save();
+
+        const updatedSection = await Section.findByIdAndUpdate(sectionId)
+                                .populate("subSection")
+                                .exec();
     
         return res.status(200).json({
             success: true,
             message: " SubSection updated successfully",
-            newSubSectionDetail
+            data: updatedSection
         })
     } catch (error) {
         console.log(error);
         return res.status(403).json({
             success: false,
-            message: "Error occured while adding SubSection",
+            message: "Error occured while updating SubSection",
             error: error.message
         })
     }
@@ -120,29 +118,37 @@ exports.updateSubSection = async(req, res) => {
 
 exports.deleteSubSection = async(req, res) => {
     try {
-        const {subSectionId} = req.body
+        const {subSectionId, sectionId} = req.body
         if(!subSectionId)
             return res.status(400).json({
                 success: false,
                 message: "subSection Id is required"})
     
         //delete from section
-        const updatedSection = await Section.findOneAndUpdate(
-                {subSection: subSectionId},
+        await Section.findOneAndUpdate(
+                {_id: sectionId},
                 {
                     $pull:{
                         subSection: subSectionId
                     }
                 },
-                {new: true}
         )
     
         //delete subSection
-        await SubSection.findByIdAndDelete({_id: subSectionId})
+        const subSection = await SubSection.findByIdAndDelete({_id: subSectionId})
+        if(!subSection){
+            return res.status(404).json({
+                success: false, 
+                message: "SubSection not found"
+            })
+        }
+
+        const updatedSection = await Section.findById(sectionId).populate("subSection")
     
         return res.status(200).json({
             success: true,
             message: "Section deleted Successfully",
+            data: updatedSection
         });
     } catch (error) {
         console.log(error)
