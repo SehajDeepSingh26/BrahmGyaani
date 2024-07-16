@@ -20,6 +20,7 @@ import Cart from "./components/Core/Dashboard/Cart"
 import { useSelector } from "react-redux"
 import AddCourse from "./components/Core/Dashboard/AddCourse"
 import toast from "react-hot-toast"
+import MyCourses from "./components/Core/Dashboard/MyCourses"
 
 function App() {
     const {user} = useSelector((state) => state.profile)
@@ -102,6 +103,8 @@ function App() {
                         user?.accountType === "Instructor" && (
                             <>
                                 <Route path="dashboard/add-course" element={<AddCourse />} />
+
+                                <Route path="dashboard/my-courses" element={<MyCourses />} />
                             </>
                         )
                     }
