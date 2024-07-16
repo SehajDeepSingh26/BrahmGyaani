@@ -33,6 +33,10 @@ const courseSchema = new mongoose.Schema({
         type: Number,
     },
 
+    thumbnail: {
+		type: String,
+	},
+
     tag:{
         type: [String],
         required: true

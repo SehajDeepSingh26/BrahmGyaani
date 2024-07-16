@@ -310,12 +310,12 @@ exports.getFullCourseDetails = async (req, res) => {
             })
             .exec()
 
-        let courseProgressCount = await CourseProgress.findOne({
-            courseID: courseId,
-            userId: userId,
-        })
+        // let courseProgressCount = await CourseProgress.findOne({
+        //     courseID: courseId,
+        //     userId: userId,
+        // })
 
-        console.log("courseProgressCount : ", courseProgressCount)
+        // console.log("courseProgressCount : ", courseProgressCount)
 
         if (!courseDetails) {
             return res.status(400).json({
@@ -332,8 +332,8 @@ exports.getFullCourseDetails = async (req, res) => {
         // }
 
         let totalDurationInSeconds = 0
-        courseDetails.courseContent.forEach((content) => {
-            content.subSectios.forEach((subSection) => {
+        courseDetails.courseContent?.forEach((content) => {
+            content.subSection.forEach((subSection) => {
                 const timeDurationInSeconds = parseInt(subSection.timeDuration)
                 totalDurationInSeconds += timeDurationInSeconds
             })
@@ -346,12 +346,13 @@ exports.getFullCourseDetails = async (req, res) => {
             data: {
                 courseDetails,
                 totalDuration,
-                completedVideos: courseProgressCount?.completedVideos
-                    ? courseProgressCount?.completedVideos
-                    : [],
+                // completedVideos: courseProgressCount?.completedVideos
+                    // ? courseProgressCount?.completedVideos
+                    // : [],
             },
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             success: false,
             message: error,

@@ -44,7 +44,7 @@ export default function CoursesTable({ courses, setCourses }) {
 
     return (
         <>
-            <Table className="rounded-xl border border-richblack-800 ">
+            <Table className="rounded-xl border border-richblack-400 ">
                 <Thead>
                     <Tr className="flex gap-x-10 rounded-t-md border-b border-b-richblack-800 px-6 py-2">
                         <Th className="flex-1 text-left text-sm font-medium uppercase text-richblack-100">
@@ -62,7 +62,7 @@ export default function CoursesTable({ courses, setCourses }) {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {console.log(courses)}
+                    {/* {console.log(courses)} */}
                     {courses?.length === 0 ? (
                         <Tr>
                             <Td className="py-10 text-center text-2xl font-medium text-richblack-100">
