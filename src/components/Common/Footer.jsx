@@ -15,9 +15,6 @@ const Resources = [
     "Chart Sheet",
     "Code challenges",
     "Docs",
-    "Projects",
-    "Videos",
-    "Workspaces",
 ];
 const Plans = ["Paid memberships", "For students", "Business solutions"];
 const Community = ["Forums", "Chapters", "Events"];

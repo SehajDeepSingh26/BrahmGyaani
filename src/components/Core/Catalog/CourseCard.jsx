@@ -3,7 +3,7 @@ import {RatingStars} from '../../Common/RatingStars'
 import GetAvgRating from '../../../utils/avgRating';
 import { Link } from 'react-router-dom';
 
-const Course_Card = ({course, Height}) => {
+const CourseCard = ({course, Height}) => {
 
 
     const [avgReviewCount, setAvgReviewCount] = useState(0);
@@ -18,12 +18,12 @@ const Course_Card = ({course, Height}) => {
   return (
     <div>
         <Link to={`/courses/${course._id}`}>
-            <div>
+            <div className='ml-10 mr-5 w-10/12'>
                 <div>
                     <img 
                         src={course?.thumbnail}
                         alt='course ka thumbnail'
-                        className={`${Height} w-full rounded-xl object-cover`}
+                        className={`${Height}  rounded-xl object-cover`}
                     />
                 </div>
                 <div>
@@ -44,4 +44,4 @@ const Course_Card = ({course, Height}) => {
   )
 }
 
-export default Course_Card
+export default CourseCard
