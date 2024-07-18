@@ -1,6 +1,10 @@
 
 const Category = require("../models/Category.model");
-// const Course = require("../models/Course.model");
+const Course = require("../models/Course.model");
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
 
 //& create Category Handler
 exports.createCategory = async(req, res) => {
@@ -43,7 +47,7 @@ exports.createCategory = async(req, res) => {
 //& getAllCategory Handler
 exports.showAllCategory = async(req, res) => {
     try {
-        const allCategory = await Category.find({}, {name: true, description:true});
+        const allCategory = await Category.find();
                     //^ find( { criteria : none}, { what fields must be their : true } )
 
         return res.status(200).json({
@@ -69,7 +73,13 @@ exports.categoryPageDetails = async(req, res) => {
         
         //^ show selected category's courses
         const selectedCategory = await Category.findById(categoryId)
-                            .populate("courses")
+                            .populate({
+                                path: "courses",
+                                match: {status: "Published"},
+                                populate: {
+                                    path: "ratingAndReviews"
+                                }
+                            })
                             .exec()
 
         if(!selectedCategory) 
@@ -77,39 +87,58 @@ exports.categoryPageDetails = async(req, res) => {
                 succcess: false,
                 message: "Category Not found!"
             })
-        // console.log(selectedCategory)
+
+        if(selectedCategory.courses.length === 0){
+            return res.status(404).json({
+                success: false,
+                message: "No Courses found for this category"
+            })
+        }
 
         //^ Show Recommended Courses (other than selected)
-        const recommendedCategory = await Category.find({
+        const categoriesExceptSelected = await Category.find({
                         _id: {$ne: categoryId}
                     })
-                    .populate("courses")
-                    .exec()
+        // console.log(categoriesExceptSelected)
+        
+        let differentCategory = await Category.findOne(categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]._id)
+                .populate({
+                    path: "courses",
+                    match: {status: "Published"}
+                })
+                .exec();
 
-
+        
+        // console.log("DIFFERENT CATEGORY: ", differentCategory)
+        
         //^ show top 10 Selling courses
-        // const top10Courses = await Course.find({}).sort({"$studentsEnrolled.length" : -1}).limit(10).exec()
-        // const top10Courses = await Course.aggregate([
-        //     { 
-        //       $addFields: { 
-        //         studentsEnrolledCount: { $size: "$studentsEnrolled" } 
-        //       } 
-        //     },
-        //     { $sort: { studentsEnrolledCount: -1 }},
-        //     { $limit: 10 }
-        //   ]);
-          
+        const allCategories = await Category.find()
+                .populate({
+                    path: "courses",
+                    match: {status: "Published"},
+                    populate: {
+                        path: "instructor"
+                    }
+                })
+                .exec()
 
-        //^ send response
-        return res.status(200).json({
+                
+        
+        const allCourses = allCategories.flatMap((category) => category.courses)
+
+        const mostSellingCourses = allCourses
+                                .sort((a,b) => a.sold - b.sold)
+                                .slice(0, 10)
+        // console.log("DIFFERENT CATEGORY: ", mostSellingCourses)
+
+
+        res.status(200).json({
             success: true,
-            message: "All Category displayed",
             data: {
-                selectedCategory, 
-                recommendedCategory,
-                // topSellingCourses
+                selectedCategory,
+                differentCategory,
+                mostSellingCourses
             }
-            
         })
 
 
@@ -117,7 +146,8 @@ exports.categoryPageDetails = async(req, res) => {
         console.log(error);
         return res.status(500).json({
             success: false,
-            message: "Something went wrong while Showing Page Category"
+            message: "Something went wrong while Showing Page Category",
+            error: error
         })
     }
 }

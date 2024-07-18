@@ -135,6 +135,7 @@ exports.editCourse = async (req, res) => {
 
         //^ update fields that are present in req.body
         for (const key in updates) {
+            // eslint-disable-next-line no-prototype-builtins
             if (updates.hasOwnProperty(key)) {
               if (key === "tag" || key === "instructions") {
                 course[key] = JSON.parse(updates[key])

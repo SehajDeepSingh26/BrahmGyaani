@@ -22,6 +22,7 @@ import AddCourse from "./components/Core/Dashboard/AddCourse"
 import toast from "react-hot-toast"
 import MyCourses from "./components/Core/Dashboard/MyCourses"
 import EditCourse from "./components/Core/Dashboard/EditCourse"
+import Catalog from "./pages/Catalog"
 
 function App() {
     const {user} = useSelector((state) => state.profile)
@@ -43,6 +44,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/catalog/:catalogName" element={<Catalog />} />
 
                 <Route
                     path="signup" element={
