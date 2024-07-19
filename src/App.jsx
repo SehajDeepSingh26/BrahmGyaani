@@ -23,6 +23,7 @@ import toast from "react-hot-toast"
 import MyCourses from "./components/Core/Dashboard/MyCourses"
 import EditCourse from "./components/Core/Dashboard/EditCourse"
 import Catalog from "./pages/Catalog"
+import CourseDetails from "./pages/CourseDetails"
 
 function App() {
     const {user} = useSelector((state) => state.profile)
@@ -45,6 +46,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/catalog/:catalogName" element={<Catalog />} />
+                <Route path="/courses/:courseId" element={<CourseDetails />} />
 
                 <Route
                     path="signup" element={
