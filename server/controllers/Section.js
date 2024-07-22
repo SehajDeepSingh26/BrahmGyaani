@@ -1,6 +1,6 @@
 const Section = require('../models/Section.model')
 const Course = require('../models/Course.model');
-const SubSection = require('../../compare/StudyNotion11/server/models/SubSection');
+const SubSection = require('../models/SubSection.model');
 
 exports.createSection = async(req, res) => {
    try {

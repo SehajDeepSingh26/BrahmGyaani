@@ -123,14 +123,14 @@ function Navbar() {
                     )}
                     {token === null && (
                         <Link to="/login">
-                            <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                            <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 hover:scale-95 transition-all duration-200">
                                 Log in
                             </button>
                         </Link>
                     )}
                     {token === null && (
                         <Link to="/signup">
-                            <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                            <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 hover:scale-95 transition-all duration-200">
                                 Sign up
                             </button>
                         </Link>

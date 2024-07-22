@@ -4,7 +4,7 @@ const User = require("../models/User.model")
 
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
 const { convertSecondsToDuration } = require("../utils/secToDuration")
-const Section = require("../../compare/StudyNotion11/server/models/Section")
+const Section = require("../models/Section.model")
 
 
 //& Create Course Handler

@@ -1,7 +1,9 @@
 import toast from "react-hot-toast";
 import { studentEndpoints } from "../apis";
 import { apiConnector } from "../apiConnector";
-import {rzpLogo} from "../../assets/Images/TimelineImage.png" //TODO get razorpay logo
+import rzpLogo from "../../assets/Logo/rzp_logo.png"
+import { setPaymentLoading } from "../../slice/courseSlice";
+import { resetCart } from "../../slice/cartSlice";
 
 const {COURSE_PAYMENT_API, COURSE_VERIFY_API, SEND_PAYMENT_SUCCESS_EMAIL_API} = studentEndpoints;
 
@@ -66,6 +68,13 @@ export async function buyCourse(courses, token, userDetails, navigate, dispatch)
             }
         }
 
+        const paymentObject = new window.Razorpay(options)
+        paymentObject.open()
+        paymentObject.on("payment.failed", function(response){
+            toast.error("Payment Failed")
+            console.log(response.error)
+        })
+
     } catch (error) {
         console.log(" PAYMENT API ERROR...... ", error)
         toast.error("Could not make payment")
@@ -73,11 +82,43 @@ export async function buyCourse(courses, token, userDetails, navigate, dispatch)
     toast.dismiss(toastId)
 }
 
-async function sendPaymentSuccessEmail(response, amount, token){
-    try {
-        // const a = b
-    } catch (error) {
-        console.log(" Error while sending email...... ", error)
-        // toast.error("Could not send emasil")
+async function sendPaymentSuccessEmail(response, amount, token) {
+    try{
+        await apiConnector("POST", SEND_PAYMENT_SUCCESS_EMAIL_API, {
+            orderId: response.razorpay_order_id,
+            paymentId: response.razorpay_payment_id,
+            amount,
+        },{
+            Authorisation: `Bearer ${token}`
+        })
     }
+    catch(error) {
+        console.log("PAYMENT SUCCESS EMAIL ERROR....", error);
+    }
+}
+
+//^ Verify payment
+async function verifySignature(bodyData, token, navigate, dispatch){
+    const toastId = toast.loading("Verifying Payment...")
+
+    // dispatch(setPaymentLoading(true))
+    try {
+        const response = await apiConnector("POST", COURSE_VERIFY_API, bodyData, {
+            Authorisation: `Bearer ${token}`
+        })
+        // console.log("RESPPNSE VERIFY SIGNATURE-----------", response)
+        if(!response){
+            throw new Error(response.data.message)
+        }
+        toast.success("Payment Successfull, you are enrolled to the course")
+        navigate("/dashboard/enrolled-courses")
+        dispatch(resetCart());
+
+    } catch (error) {
+        console.log(" PAYMENT VERIFY ERROR...... ", error)
+        toast.error('Could not verify payment')
+    }
+
+    toast.dismiss(toastId)
+    // dispatch(setPaymentLoading(false))
 }
