@@ -220,7 +220,7 @@ exports.showAllCourses = async (req, res) => {
         return res.status(500).json({
             success: false,
             message: "Cannot fetch course data while getting all course.",
-            error: error.message
+            error: error
         })
     }
 }
@@ -279,7 +279,7 @@ exports.getCourseDetails = async (req, res) => {
         })
     }
     catch (error) {
-        console.log(error.message);
+        console.log(error);
         return res.status(500).json({
             success: false,
             message: "Something went wrong with getCourseDetails Handler",

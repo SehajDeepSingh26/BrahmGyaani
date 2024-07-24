@@ -16,21 +16,21 @@ exports.capturePayment = async(req, res) => {
             success: false,
             message: "Please provide courses to buy"
         })
-    
         let totalAmount = 0;
         for(const course_id of courses){
             let course;
             try {
-                course = await Course.findById(course_id.courseId)
+                course = await Course.findById(course_id)
                 if(!course){
                     return res.status(404).json({
                         success: false,
                         message: "could not find the course"
                     })
                 }
+                // console.log("CURSE-------------------------------------", course)
 
                 const uid = new mongoose.Types.ObjectId(userId)
-                if(courses?.studentEnrolled?.includes(uid)){
+                if(course?.studentsEnrolled?.includes(uid)){
                     return res.status(200).json({
                         success: false,
                         message: "Student is already enrolled in this course"
@@ -139,7 +139,7 @@ const enrollStudents = async(courses, userId, res) =>{
         try {
             //^ find course and enroll student in it
             const enrolledCourse = await Course.findByIdAndUpdate(
-                        {_id: course.courseId}, 
+                        {_id: course}, 
                         {$push: {
                             studentsEnrolled: userId
                         }},
@@ -157,7 +157,7 @@ const enrollStudents = async(courses, userId, res) =>{
             const enrolledStudent = await User.findByIdAndUpdate(
                         {_id: userId},
                         {$push: {
-                            courses: course.courseId
+                            courses: course
                         }},
                         {new: true}
             )
@@ -176,7 +176,6 @@ const enrollStudents = async(courses, userId, res) =>{
                 courseEnrollmentEmail(enrolledCourse.courseName, `${enrolledStudent.firstName}`)
             )
     
-            console.log("Course Enrollment Email sent broooo")
         } catch (error) {
             console.log(error);
             return res.status(500).json({

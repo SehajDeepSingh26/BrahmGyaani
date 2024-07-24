@@ -28,6 +28,7 @@ const cartSlice = createSlice({
             // If the course is not in the cart, add it to the cart
             state.cart.push(course)
             // Update the total quantity and price
+            console.log("In cart Slice------", course)
             state.totalItems++
             state.total += course.price
             // Update to localstorage

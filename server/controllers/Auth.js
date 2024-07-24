@@ -126,7 +126,7 @@ exports.signUp = async (req, res) => {
             contactNumber: null,
         });
 
-        console.log("otp verified");
+        // console.log("otp verified");
         const user = await User.create({
             firstName,
             lastName,
@@ -220,25 +220,20 @@ exports.login = async (req, res) => {
 //& changePassword
 exports.changePassword = async (req, res) => {
 	try {
-		// Get user data from req.user
 		const userDetails = await User.findById(req.user.id);
 
-		// Get old password, new password, and confirm new password from req.body
 		const { password, newPassword, confirmpassword } = req.body;
 
-		// Validate old password
 		const isPasswordMatch = await bcrypt.compare(
 			password,
 			userDetails.password
 		);
 		if (!isPasswordMatch) {
-			// If old password does not match, return a 401 (Unauthorized) error
 			return res
 				.status(401)
 				.json({ success: false, message: "The password is incorrect" });
 		}
 
-		// Match new password and confirm new password
 		if (newPassword !== confirmpassword) {
 			// If new password and confirm new password do not match, return a 400 (Bad Request) error
 			return res.status(400).json({
