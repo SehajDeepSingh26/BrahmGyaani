@@ -1,93 +1,93 @@
-import copy from 'copy-to-clipboard'
-import React from 'react'
-import toast from 'react-hot-toast'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { addToCart } from '../../../slice/cartSlice'
+import copy from 'copy-to-clipboard';
+import React from 'react';
+import toast from 'react-hot-toast';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addToCart } from '../../../slice/cartSlice';
 
-const CourseCardDetails = ({course, setConfirmationModal, handleBuyCourse}) => {
-    const {user} = useSelector((state) => state.profile)
-    const {token} = useSelector((state) => state.auth)
+const CourseCardDetails = ({ course, setConfirmationModal, handleBuyCourse }) => {
+    const { user } = useSelector((state) => state.profile);
+    const { token } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const {
         thumbnail: ThumbnailImage,
-        price: price
-    } = course
+        price: price,
+    } = course;
 
-    const handleAddToCart = async() => {
-        if(user && user.accountType === "Instructor"){
-            toast.error("You are an instructor, you cant buy a course")
+    const handleAddToCart = async () => {
+        if (user && user.accountType === "Instructor") {
+            toast.error("You are an instructor, you can't buy a course");
             return;
         }
-        if(token){
-            dispatch(addToCart(course))
+        if (token) {
+            dispatch(addToCart(course));
             return;
         }
 
-        // setConfirmationModal({
-        //     text1: "You are not logged in"
-        // })
-    }
+        setConfirmationModal({
+            text1: "You are not logged in",
+            text2: "Please login to add courses to your cart",
+            btn1Text: "Login",
+            btn2Text: "Cancel",
+            btn1Handler: () => navigate("/login"),
+            btn2Handler: () => setConfirmationModal(null)
+        });
+    };
 
     const handleShare = (e) => {
-        copy(window.location.href)
-        toast.success("Link copied to clipboard")
-    }
-
+        copy(window.location.href);
+        toast.success("Link copied to clipboard");
+    };
 
     return (
-        <div className='bg-richblack-400 flex flex-col p-5 absolute   translate-y-[100px] translate-x--[30px]'>
-            <img src={ThumbnailImage} alt="thumbnail image" className='max-h-[300px] w-[400px] rounded-xl' />
-            <div>
-                Rs./{price}
+        <div className='flex flex-col p-5 bg-richblack-600 rounded-xl shadow-lg '>
+            <img src={ThumbnailImage} alt="thumbnail" className='max-h-[300px] w-[400px] rounded-xl mb-4' />
+            <div className='text-white text-xl mb-4'>
+                Rs. {price}
             </div>
-            {console.log(course)}
-            <div>
-                <button onClick={
-                    user && user && course.studentsEnrolled.includes(user?._id) ? () => navigate("/dashboard/enrolled-courses") : handleBuyCourse
-                }>
-                    {
-                        user && course.studentsEnrolled.includes(user?._id) ? "Go to Course" : "Buy Now"
+            <div className='mb-4'>
+                <button
+                    className='bg-blue-500 text-white px-4 py-2 rounded-md w-full mb-2'
+                    onClick={
+                        user && course.studentsEnrolled.includes(user?._id)
+                            ? () => navigate("/dashboard/enrolled-courses")
+                            : handleBuyCourse
                     }
+                >
+                    {user && course.studentsEnrolled.includes(user?._id) ? "Go to Course" : "Buy Now"}
                 </button>
-                
-                {
-                    (!course?.studentsEnrolled.includes(user?._id) && (
-                        <button onClick={handleAddToCart}>Add to Cart</button>
-                    ))
-                }
+                {!course?.studentsEnrolled.includes(user?._id) && (
+                    <button
+                        className='bg-brown-500 text-white px-4 py-2 rounded-md w-full'
+                        onClick={handleAddToCart}
+                    >
+                        Add to Cart
+                    </button>
+                )}
             </div>
-
-            <div>
-                <p>
-                    30 day Money back Gurantee
-                </p>
-                <p>
-                    This course Includes
-                </p>
-                <div className='flex flex-col gap-y-3'>
-                    {
-                        course?.instructions?.map((item, index) => (
-                            <p key={index} className='flex gap-2'>
-                                <span>
-                                    {item}
-                                </span>
-                            </p>
-                        ))
-                    }
-
-                </div>
+            <div className='text-white mb-4'>
+                <p className='mb-2'>30 day Money back Guarantee</p>
+                <p className='mb-2'>This course includes:</p>
+                <ul className='list-disc list-inside flex flex-col gap-y-3 pl-4'>
+                    {course?.instructions?.map((item, index) => (
+                        <li key={index} className='flex gap-2'>
+                            <span>-- {item}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
-
             <div>
-                <button onClick={handleShare}>
+                <button
+                    className='bg-gray-600 text-white px-4 py-2 rounded-md w-full'
+                    onClick={handleShare}
+                >
                     Share
                 </button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default CourseCardDetails
+export default CourseCardDetails;

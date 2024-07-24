@@ -1,58 +1,64 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { buyCourse } from "../services/operations/StudentFeaturesAPI";
 import { fetchCourseDetails } from '../services/operations/courseDetailAPI';
 import GetAvgRating from '../utils/avgRating';
-import Error from "../pages/Error"
+import Error from "../pages/Error";
 import ConfirmationModal from '../components/Common/ConfirmationModal';
 import { RatingStars } from '../components/Common/RatingStars';
 import { formatDate } from '../utils/dateFormatter';
 import { FaGlobe } from 'react-icons/fa';
 import CourseCardDetails from '../components/Core/Course/CourseCardDetails';
-
+import Footer from '../components/Common/Footer';
 
 const CourseDetails = () => {
-
-    const { user } = useSelector((state) => state.profile)
-    const { token } = useSelector((state) => state.auth)
+    const { user } = useSelector((state) => state.profile);
+    const { token } = useSelector((state) => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { courseId } = useParams();
-    const { loading } = useSelector((state) => state.profile)
-    const { paymentLoading } = useSelector((state) => state.course)
-    const [confirmationModal, setConfirmationModal] = useState(null)
-
-    const [courseData, setCourseData] = useState(null)
+    const { loading } = useSelector((state) => state.profile);
+    const { paymentLoading } = useSelector((state) => state.course);
+    const [confirmationModal, setConfirmationModal] = useState(null);
+    const [courseData, setCourseData] = useState(null);
 
     useEffect(() => {
         const getCourseFullDetails = async () => {
             try {
                 const result = await fetchCourseDetails(courseId);
-                setCourseData(result)
+                setCourseData(result);
             } catch (error) {
-                console.log("Could noyt fetch course Data")
+                console.log("Could not fetch course data");
             }
-        }
-        getCourseFullDetails()
-    }, [courseId])
+        };
+        getCourseFullDetails();
+    }, [courseId]);
 
     const [avgReviewCount, setAvgReviewCount] = useState(0);
     useEffect(() => {
         const count = GetAvgRating(courseData?.data?.courseDetail?.ratingAndReviews);
-        setAvgReviewCount(count)
-    }, [courseData])
+        setAvgReviewCount(count);
+    }, [courseData]);
 
-    const [totalNoOfLectures, setTotalNoOfLectures] = useState(0)
+    const [totalNoOfLectures, setTotalNoOfLectures] = useState(0);
     useEffect(() => {
         let lectures = 0;
+
         courseData?.data?.courseDetail?.courseContent?.forEach((sec) => {
-            lectures = sec.subSection.length || 0
-        })
-        setTotalNoOfLectures(lectures)
-    }, [courseData])
+            lectures += sec.subSection.length || 0;
+        });
+        setTotalNoOfLectures(lectures);
+    }, [courseData]);
 
-
+    const [isActive, setIsActive] = useState([]);
+    const handleActive = (id) => {
+        setIsActive(
+            !isActive.includes(id)
+                ? isActive.concat(id)
+                : isActive.filter((e) => e != id)
+        );
+    };
 
     const handleBuyCourse = () => {
         if (token) {
@@ -66,14 +72,13 @@ const CourseDetails = () => {
             btn2Text: "Cancel",
             btn1Handler: () => navigate("/login"),
             btn2Handler: () => setConfirmationModal(null)
-        })
-    }
-
+        });
+    };
 
     if (loading || !courseData) {
         return (
             <div className='text-white'>Loading...</div>
-        )
+        );
     }
 
     if (!courseData.success) {
@@ -81,68 +86,99 @@ const CourseDetails = () => {
             <div>
                 <Error />
             </div>
-        )
+        );
     }
-    console.log("COURSEDATA----------", courseData)
 
     const {
-        // _id: course_id,
         courseName,
         courseDescription,
-        thumbnail,
-        price,
         whatYouWillLearn,
         courseContent,
         ratingAndReviews,
         instructor,
         studentsEnrolled,
         createdAt,
-        // eslint-disable-next-line no-unsafe-optional-chaining
+    // eslint-disable-next-line no-unsafe-optional-chaining
     } = courseData.data?.courseDetail;
 
-
-
     return (
-        <div className='flex text-richblack-5 mt-20 '>
-
-            <div className='relative flex flex-col justify-start p-8 bg-richblack-200'>
-                <p>{courseName} </p>
-                <p>{courseDescription} </p>
-                <div className='flex flex-row gap-x-2'>
-                    <span>{avgReviewCount}</span>
+        <div className='text-richblack-5 mt-20 relative'>
+            <div className='relative flex flex-col justify-start p-8 bg-richblack-800 rounded-lg shadow-md'>
+                <p className='text-3xl font-bold mb-4'>{courseName}</p>
+                <p className='text-lg mb-4'>{courseDescription}</p>
+                <div className='flex items-center gap-x-2 mb-4'>
+                    <span className='text-lg font-semibold'>
+                        {avgReviewCount}
+                    </span>
                     <RatingStars Review_Count={avgReviewCount} Star_Size={24} />
-                    <span>{`(${ratingAndReviews.length} reviews) `} </span>
-                    <span>{`(${studentsEnrolled.length} Students Enrolled)`} </span>
+                    <span className='text-sm'>
+                        {`(${ratingAndReviews.length} reviews)`}
+                    </span>
+                    <span className='text-sm'>
+                        {`(${studentsEnrolled.length} Students Enrolled)`}
+                    </span>
                 </div>
 
-                <div>
-                    <p>Created By {`${instructor.firstName} ${instructor.lastName}`} </p>
+                <div className='text-lg mb-4'>
+                    <p>Created By {`${instructor.firstName} ${instructor.lastName}`}</p>
                 </div>
 
-                <div className='flex gap-x-3'>
-                    <p>
+                <div className='flex items-center gap-x-3 mb-4'>
+                    <p className='text-sm'>
                         Created at {formatDate(createdAt)}
                     </p>
-                    <FaGlobe className='translate-y-1' />
-                    <p>English</p>
+                    <FaGlobe />
+                    <p className='text-sm'>English</p>
                 </div>
 
-                    </div>
-                <div>
+                <div className='absolute m-60 mt-96 right-0 transform -translate-y-1/2 bg-richblack-300 p-4 rounded-xl shadow-lg'>
                     <CourseCardDetails
                         course={courseData?.data.courseDetail}
                         setConfirmationModal={setConfirmationModal}
                         handleBuyCourse={handleBuyCourse}
                     />
-
                 </div>
+            </div>
 
+            <div className='mt-8'>
+                <div className='w-[700px] p-8 rounded-lg shadow-md'>
+                    <p className='text-2xl font-bold mb-4'>
+                        What You Will Learn
+                        </p>
+                    <div className='text-lg'>
+                        {whatYouWillLearn}
+                    </div>
+                </div>
+            </div>
 
+            <div className='mt-8 p-8 w-[700px] rounded-lg shadow-md'>
+                <div className='mb-4'>
+                    <p className='text-2xl font-bold'>Course Content</p>
+                </div>
+                <div className='flex justify-between items-center mb-4 '>
+                    <div className='text-lg flex gap-x-2'>
+                        <span>{courseContent?.length} section(s)</span>
+                        <span>{totalNoOfLectures} lectures</span>
+                        <span>{courseData.data.totalDuration} total length</span>
+                    </div>
+                    <div
+                        onClick={() => setIsActive([])}
+                    >
+                        <button className='bg-blue-500 text-white px-4 py-2 rounded-md'>
+                            Collapse all Sections
+                        </button>
+                    </div>
+                </div>
+            </div>
 
+            <div className='mt-20'>
+
+            <Footer />
+            </div>
 
             {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}
         </div>
-    )
-}
+    );
+};
 
-export default CourseDetails
+export default CourseDetails;

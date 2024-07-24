@@ -62,6 +62,7 @@ const courseSchema = new mongoose.Schema({
 		type: String,
 		enum: ["Draft", "Published"],
 	},
+    
 
 }, {timestamps:true})
 
