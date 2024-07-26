@@ -37,4 +37,5 @@ export const {
     updateCompletedLectures,
 } = viewCourseSlice.actions
 
-export default viewCourseSlice.reducer
+// export default viewCourseSlice.reducer
+export const viewCourseReducer = viewCourseSlice.reducer;

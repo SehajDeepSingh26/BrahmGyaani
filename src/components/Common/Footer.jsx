@@ -157,7 +157,7 @@ const Footer = () => {
                         key={i}
                         className={` ${
                             BottomFooter.length - 1 === i
-                            ? ""
+                            ? "cursor-pointer hover:text-richblack-50 transition-all duration-200"
                             : "border-r border-richblack-700 cursor-pointer hover:text-richblack-50 transition-all duration-200"
                         } px-3 `}
                         >
@@ -169,7 +169,7 @@ const Footer = () => {
                     })}
                 </div>
 
-                <div className="text-center">Copyright </div>
+                <div className="text-center">Copyright @Sehajdeep Singh </div>
                 </div>
             </div>
         </div>

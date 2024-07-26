@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import ProgressBar from "@ramonak/react-progress-bar";
 import { getUserEnrolledCourses } from '../../../services/operations/profileAPI';
+import { useNavigate } from 'react-router-dom';
 
 const EnrolledCourses = () => {
     const { token } = useSelector((state) => state.auth)
+    const navigate = useNavigate()
 
     const [enrolledCourses, setEnrolledCourses] = useState(null)
 
@@ -36,9 +38,16 @@ const EnrolledCourses = () => {
                             <p>Progress</p>
                         </div>
                         {
-                            enrolledCourses.map((course, index) => (
-                                <div key={index} className="grid grid-cols-3 gap-4 items-center bg-richblack-700 p-4 mb-4 rounded-lg">
-                                    <div className="flex items-center gap-4">
+                            enrolledCourses.map((course, i, arr) => (
+                                <div key={i} className={`grid grid-cols-3 gap-4 items-center bg-richblack-700 p-4 mb-4 rounded-lg ${i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"}`}>
+                                    <div 
+                                        className="flex items-center gap-4"
+                                        onClick={() => {
+                                            navigate(
+                                              `/view-course/${course?._id}/section/${course.courseContent?.[0]?._id}/sub-section/${course.courseContent?.[0]?.subSection?.[0]?._id}`
+                                            )
+                                          }}    
+                                    >
                                         <img src={course.thumbnail} alt={course.courseName} className="w-16 h-16 rounded-lg object-cover" />
                                         <div>
                                             <p className="text-lg font-semibold">{course.courseName}</p>
@@ -54,8 +63,6 @@ const EnrolledCourses = () => {
                                             completed={course.progressPercentage || 0}
                                             height='8px'
                                             isLabelVisible={false}
-                                            bgColor="#10B981"
-                                            baseBgColor="#1F2937"
                                         />
                                     </div>
                                 </div>
