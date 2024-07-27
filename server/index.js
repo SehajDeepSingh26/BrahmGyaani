@@ -22,6 +22,7 @@ const userRoutes = require("./routes/User.route");
 const profileRoutes = require("./routes/Profile.route");
 const paymentRoutes = require("./routes/Payment.route");
 const courseRoutes = require("./routes/Course.route")
+const contactRoute = require("./routes/Contact.route")
 
 
 const {dbConnect} = require("./config/database");
@@ -51,6 +52,7 @@ app.use("/api/v1/auth" , userRoutes);
 app.use("/api/v1/profile" , profileRoutes);
 app.use("/api/v1/course" , courseRoutes);
 app.use("/api/v1/payment" , paymentRoutes);
+app.use("/api/v1/reach", contactRoute);
 //defaultroute
 app.get("/" , (req , res)=>{
        return res.json({
