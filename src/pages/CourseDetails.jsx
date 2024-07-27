@@ -168,12 +168,12 @@ const CourseDetails = () => {
                             Collapse all Sections
                         </button>
                     </div>
+                    
                 </div>
             </div>
 
             <div className='mt-20'>
-
-            <Footer />
+                <Footer />
             </div>
 
             {confirmationModal && <ConfirmationModal modalData={confirmationModal} />}

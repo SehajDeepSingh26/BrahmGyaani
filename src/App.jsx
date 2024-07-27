@@ -27,6 +27,7 @@ import CourseDetails from "./pages/CourseDetails"
 import ViewCourse from "./pages/ViewCourse"
 import { ACCOUNT_TYPE } from "./utils/constants"
 import VideoDetails from "./components/Core/ViewCourse/VideoDetails"
+import Contact from "./pages/Contact"
 
 function App() {
     const {user} = useSelector((state) => state.profile)
@@ -50,6 +51,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/catalog/:catalogName" element={<Catalog />} />
                 <Route path="/courses/:courseId" element={<CourseDetails />} />
+                <Route path="/contact" element={<Contact />} />
 
                 <Route
                     path="signup" element={

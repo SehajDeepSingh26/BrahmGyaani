@@ -19,7 +19,9 @@ exports.createRating = async(req, res) => {
 
         const courseDetail = await Course.findOne({
                                     _id: courseId, 
-                                    studentsEnrolled:{$elematch: {$eq: userId}}
+                                    studentsEnrolled:{
+                                        $in: [userId] 
+                                    }
         })
         if(!courseDetail)
             return res.status(500).json({
@@ -38,31 +40,32 @@ exports.createRating = async(req, res) => {
             })
         }
 
-        const newrating = RatingReview.create({
+        const newrating = await RatingReview.create({
                 user: userId,
                 course: courseId,
                 rating, review
         })
 
-        const updatedCourseDeatils = await Course.findByIdAndUpdate({_id:courseId},
+        const updatedCourseDeatils = await Course.findByIdAndUpdate(courseId,
                                 {$push: {
                                     ratingAndReviews: newrating._id
                                 }},
                                 {new: true}
         )
-        // console.log(updatedCourseDeatils);
+        console.log("---------------", updatedCourseDeatils);
 
         return res.status(200).json({
-            succss: true,
+            success: true,
             message: "rating Created successfully",
             data: newrating
         })
 
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
         return res.status(500).json({
             success: false,
-            message: "Something went wrong with creating Review",           
+            message: "Something went wrong with creating Review",
+            error: error           
         })
     }
 }
@@ -120,7 +123,6 @@ exports.getAllRating = async(req, res) => {
                                 .sort({rating: "desc"})
                                 .populate({
                                     path: "user",
-                                    select: "firstName, lastName, email, image",
                                 })
                                 .populate({
                                     path: "course",
@@ -138,7 +140,8 @@ exports.getAllRating = async(req, res) => {
         console.log(error.message);
         return res.status(500).json({
             success: false,
-            message: "Something went wrong with fetching all reviews",            
+            message: "Something went wrong with fetching all reviews", 
+            error: error           
         })
     }
 }

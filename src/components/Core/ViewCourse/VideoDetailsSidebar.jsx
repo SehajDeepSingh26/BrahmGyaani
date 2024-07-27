@@ -36,7 +36,7 @@ const VideoDetailsSidebar = ({ setReviewModal }) => {
     }, [courseSectionData, courseEntireData, location.pathname]);
 
     return (
-        <div className='mt-20 text-white w-1/4'>
+        <div className='mt-10 text-white w-1/4'>
             <div className='bg-richblack-900 p-5 rounded-lg shadow-md'>
                 {/* for btns and headings */}
                 <div className="flex justify-between items-center mb-4">
