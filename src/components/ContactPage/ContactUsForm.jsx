@@ -113,10 +113,12 @@ const ContactUsForm = () => {
                             id='countrycode'
                             className='p-2 rounded-md text-black w-20'
                             {...register("countrycode", { required: true })}
+                            defaultValue='+91'
                         >
                             {
                                 CountryCode.map((element, index) => {
                                     return (
+                                        
                                         <option key={index} value={element.code}>
                                             {element.code}
                                         </option>
@@ -129,7 +131,7 @@ const ContactUsForm = () => {
                         <input type="number"
                             name='phonenumber'
                             id='phonenumber'
-                            placeholder='123456789'
+                            placeholder='Enter phone no.'
                             className='p-2 rounded-md text-black flex-grow'
                             {...register("phoneNo", {
                                 required: { value: true, message: "Please enter phone number" },

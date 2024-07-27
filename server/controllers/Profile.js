@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 const Profile = require("../models/Profile.model");
 const User = require("../models/User.model");
+const Course = require("../models/Course.model");
 const {uploadImageToCloudinary} = require("../utils/imageUploader")
 
 exports.updateProfile = async(req, res) => {
@@ -180,3 +181,40 @@ exports.getEnrolledCourses = async (req, res) => {
         })
       }
 };
+
+exports.instructorDashboard = async(req, res) => {
+    try {
+        const courseDetails = await Course.find({instructor: req.user.id})
+        // let totalAmountGenerated = 0;
+
+        const courseData = courseDetails.map((course) => {
+            const totalStudentsEnrolled = course.studentsEnrolled.length
+            const totalAmountGenerated = totalStudentsEnrolled * course.price
+
+            //create new object with additional details
+            const courseDataStats ={
+                _id: course._id,
+                courseName: course.courseName,
+                courseDescription: course.courseDescription,
+                totalStudentsEnrolled,
+                totalAmountGenerated
+            }
+
+            return courseDataStats;
+        })
+
+        return res.status(200).json({
+            success: true,
+            courses: courseData
+        })
+
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success: false,
+            message: "Internal Server error",
+            error: error
+          })
+        
+    }
+}

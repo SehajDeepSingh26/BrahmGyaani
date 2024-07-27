@@ -10,6 +10,7 @@ import StatsComponenet from '../components/Core/AboutPage/Stats'
 import LearningGrid from '../components/Core/AboutPage/LearningGrid'
 import ContactFormSection from '../components/Core/AboutPage/ContactFormSection'
 import Footer from '../components/Common/Footer'
+import ReviewSlider from '../components/Common/ReviewSlider'
 
 const About = () => {
     return (
@@ -101,14 +102,14 @@ const About = () => {
                 </div>
             </section>
             <StatsComponenet />
-            <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white mb-[150px]">
+            <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-5 text-white mb-[50px]">
                 <LearningGrid />
-                <ContactFormSection />
+                <p className='text-4xl font-bold text-center translate-y-3'>Reviews from Students</p>
+                <ReviewSlider />
             </section>
 
             <section>
-                Review Slider here 
-                {/* <ReviewSlider/> */}
+                <ContactFormSection />
             </section>
 
 
