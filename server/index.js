@@ -33,10 +33,18 @@ dbConnect();
 //middlewares
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({
-       origin:"http://localhost:5173",      //^ frontend link
-       credentials:true,
-}))
+if(process.env.DEPLOY == "PRODUCTION"){
+    app.use(cors({
+        origin:"https://brahmgyaani.netlify.app",      //^ frontend link
+        credentials:true,
+ }))
+}
+else{
+    app.use(cors({
+        origin:"http://localhost:5173",      //^ frontend link
+        credentials:true,
+ }))
+}
 
 app.use(fileUpload({
        useTempFiles:true,

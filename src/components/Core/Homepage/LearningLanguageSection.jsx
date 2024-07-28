@@ -38,10 +38,8 @@ const LearningLanguageSection = () => {
             </div>
 
             <div className='w-fit'>
-                <CTAButton active={true} linkto={"/signup"}>
-                    <div>
-                        Learn more
-                    </div>
+                <CTAButton active={true} linkTo={"/about"}>
+                    Learn More
                 </CTAButton>
             </div>
 

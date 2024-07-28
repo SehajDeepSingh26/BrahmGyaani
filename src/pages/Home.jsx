@@ -31,14 +31,14 @@ function Home() {
                 </div>
 
             <div className="text-center text-4xl font-semibold mt-7">
-                Empower your future with <HighlightText text={"Coding Skills"} />{" "}
+                Empower your future with <HighlightText text={"Coding Skills"} />
             </div>
             <div className=" mt-5 w-[65%]  text-center text-[15px] text-richblack-300 font-bold">
-                with our online coding course , you can learn at your own pace , from anywhere in the world and get access to a wealth of resourcces, including hands-on projects , quizzes and personalised feedback from instructor{" "}
+            We believe in the transformative power of education and reflection. Inspired by the profound wisdom of Guru Granth Sahib Ji, our mission is to create an EdTech platform that not only imparts knowledge but also encourages deep contemplation and reflection, leading to a life of benevolence and service.
             </div>
 
             <div className="flex gap-7 mt-10">
-                <CTAButton active={true} linkTo={"/signup"}>
+                <CTAButton active={true} linkTo={"/about"}>
                     Learn More
                 </CTAButton>
                 <CTAButton active={false} linkTo={"/login"}>
@@ -73,7 +73,7 @@ function Home() {
                     }}
                     ctabtn2={{
                         btnText: "Learn More",
-                        linkTo: "/login",
+                        linkTo: "/about",
                         active: false,
                     }}
                     codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n<linkrel="stylesheet"href="styles.css"></head>\n<body>\n<h1><a href="/">Header</a></h1>\n <nav><a href="maxi">Hello</a></nav>\n</body>\n</html>`}
@@ -103,7 +103,7 @@ function Home() {
                     }}
                     ctabtn2={{
                         btnText: "Learn More",
-                        linkTo: "/login",
+                        linkTo: "/about",
                         active: false,
                     }}
                     codeblock={`<<!DOCTYPE html>\n<html>\n<head><title>Example</title>\n<linkrel="stylesheet"href="styles.css"></head>\n<body>\n<h1><a href="/">Header</a></h1>\n <nav><a href="maxi">Hello</a></nav>\n</body>\n</html>`}
@@ -127,7 +127,7 @@ function Home() {
                                 </div>
                             </CTAButton>
 
-                            <CTAButton active={false} linkTo={"/signup"}>
+                            <CTAButton active={false} linkTo={"/about"}>
                                 <div>Learn More</div>
                             </CTAButton>
                         </div>
@@ -143,11 +143,11 @@ function Home() {
                     </div>
                     <div className="flex flex-col gap-10 w-[40%] items-start">
                         <div className="text-[16px]">
-                            The modern StudyNotion is the dictates its own terms. Today, to
+                            The modern BrahmGyaani dictates its own terms. Today, to
                             be a competitive specialist requires more than professional
                             skills.
                         </div>
-                        <CTAButton active={true} linkTo={"/signup"}>
+                        <CTAButton active={true} linkTo={"/about"}>
                             <div>Learn More</div>
                         </CTAButton>
                     </div>
@@ -171,11 +171,6 @@ function Home() {
 
       {/* Footer */}
       <Footer />
-
-        {/* Section 4 */}
-
-        {/* FOOTER */}
-        {/* <Footer/> */}
 
 
     </div>

@@ -47,7 +47,7 @@ const ContactUsForm = () => {
     }, [reset, isSubmitSuccessful])
 
     return (
-        <form onSubmit={handleSubmit(submitContactForm)} className="max-w-3xl mx-auto p-8 bg-gray-900 text-white rounded-lg shadow-lg">
+        <form onSubmit={handleSubmit(submitContactForm)} className="mb-8 max-w-2xl mx-auto p-8 bg-gray-900 text-white rounded-lg shadow-lg">
             <h2 className="text-3xl font-bold mb-6">Contact Us</h2>
             <div className="flex flex-col gap-5">
                 <div className='flex gap-5'>

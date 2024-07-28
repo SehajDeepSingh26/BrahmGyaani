@@ -5,7 +5,7 @@ const ConfirmationModal = ({ modalData }) => {
     // console.log(modalData);
     try {
         return (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="fixed min-h-[700px] inset-0 flex items-center justify-center z-50">
                 {/* Backdrop with blur */}
                 <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"></div>
 

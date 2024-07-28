@@ -20,11 +20,8 @@ const About = () => {
                     <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
                         Driving Innovation in Online Education for a
                         <HighlightText text={" Brighter Future"} />
-                        <p className="mx-auto mt-0 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
-                            Studynotion is at the forefront of driving innovation in online
-                            education. We`re passionate about creating a brighter future by
-                            offering cutting-edge courses, leveraging emerging technologies,
-                            and nurturing a vibrant learning community.
+                        <p className="mx-auto mt-4 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
+                        Brahmgyaani aims to create a holistic educational experience that not only equips students with academic knowledge but also instills the values of reflection and benevolence. Our platform aspires to cultivate compassionate, knowledgeable individuals who are dedicated to making a positive impact on the world.
                         </p>
                     </header>
                     <div className="sm:h-[70px] lg:h-[150px]"></div>

@@ -355,8 +355,8 @@ exports.sendPaymentSuccessEmail = async(req, res) => {
     
 //                 //^ send confirmation Email to User
 //                 const emailResponse = await mailSender(enrolledstudent.email, 
-//                                                 "Confirmation from StudyNotion",
-//                                                 "Congratulations, Enrolled into new course from StudyNotion"
+//                                                 "Confirmation from BrahmGyaani",
+//                                                 "Congratulations, Enrolled into new course from BrahmGyaani"
 //                 )
 //                 console.log(emailResponse);
     

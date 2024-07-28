@@ -8,9 +8,9 @@ const LearningGridArray = [
         heading: "World-Class Learning for",
         highlightText: "Anyone, Anywhere",
         description:
-            "Studynotion partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide.",
+            "BrahmGyaani partners with more than 275+ leading universities and companies to bring flexible, affordable, job-relevant online learning to individuals and organizations worldwide.",
         BtnText: "Learn More",
-        BtnLink: "/",
+        BtnLink: scrollToTop(),
     },
     {
         order: 1,
@@ -22,28 +22,31 @@ const LearningGridArray = [
         order: 2,
         heading: "Our Learning Methods",
         description:
-            "Studynotion partners with more than 275+ leading universities and companies to bring",
+            "BrahmGyaani partners with more than 275+ leading universities and companies to bring",
     },
     {
         order: 3,
         heading: "Certification",
         description:
-            "Studynotion partners with more than 275+ leading universities and companies to bring",
+            "BrahmGyaani partners with more than 275+ leading universities and companies to bring",
     },
     {
         order: 4,
         heading: `Rating "Auto-grading"`,
         description:
-            "Studynotion partners with more than 275+ leading universities and companies to bring",
+            "BrahmGyaani partners with more than 275+ leading universities and companies to bring",
     },
     {
         order: 5,
         heading: "Ready to Work",
         description:
-            "Studynotion partners with more than 275+ leading universities and companies to bring",
+            "BrahmGyaani partners with more than 275+ leading universities and companies to bring",
     },
 ];
 
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 const LearningGrid = () => {
     return (
       <div className="grid mx-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12">
@@ -72,9 +75,7 @@ const LearningGrid = () => {
                   </p>
   
                   <div className="w-fit mt-2">
-                    <CTAButton active={true} linkto={card.BtnLink}>
-                      {card.BtnText}
-                    </CTAButton>
+                    <button className={`text-center text-[13px] px-6 py-3 rounded-md font-bold bg-yellow-50 text-black hover:scale-95 transition-all duration-200`} onClick={() => scrollToTop()}>Learn More</button>
                   </div>
                 </div>
               ) : (
