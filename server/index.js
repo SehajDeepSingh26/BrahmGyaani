@@ -34,6 +34,7 @@ dbConnect();
 app.use(express.json());
 app.use(cookieParser());
 if(process.env.DEPLOY == "PRODUCTION"){
+    console.log("I AM IN PRODUCTION")
     app.use(cors({
         origin:"https://brahmgyaani.netlify.app",      //^ frontend link
         credentials:true,

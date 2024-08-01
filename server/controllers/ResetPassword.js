@@ -38,7 +38,12 @@ exports.resetPasswordToken = async(req, res) => {
                                             {new:true})     //^ returns the updated user to updateUser variable
     
         //^ send email containing the url
-        const url = `http://localhost:5173/update-password/${token}`
+        let url = "";
+        if(process.env.DEPLOY !== "PRODUCTION")
+            url = `http://localhost:5173/update-password/${token}`
+        else{
+            url = `https://brahmgyaaniii.netlify.app//${token}`
+        }
         mailSender(email, "Reset Password Link", `The Link for Reset Password: ${url}`)
     
         //^ send response
