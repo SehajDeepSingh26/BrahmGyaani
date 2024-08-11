@@ -22,7 +22,7 @@ const ProfileDropdown = () => {
     if (!user) return null;
 
     return (
-        <button className="relative" onClick={() => setOpen(true)}>
+        <button className="fixed" onClick={() => setOpen(true)}>
             {/* {console.log("user--->", user)} */}
             <div className="flex items-center gap-x-1">
                 <img

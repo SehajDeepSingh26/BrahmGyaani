@@ -67,7 +67,7 @@ exports.paymentSuccessEmail = (name, amount, orderId, paymentId) => {
       
       <body>
           <div class="container">
-              <a href="https://BrahmGyaani-edtech-project.vercel.app"><img class="logo" src="https://i.ibb.co/7Xyj3PC/logo.png"
+              <a href="https://BrahmGyaani.netlify.app"><img class="logo" src="https://i.ibb.co/WFFjvDM/Brahm-Gyaani.png"
                       alt="BrahmGyaani Logo"></a>
               <div class="message">Course Payment Confirmation</div>
               <div class="body">

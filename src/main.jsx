@@ -18,9 +18,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
         <BrowserRouter>
             <App/>
-            <Toaster/>
+            <Toaster/>     {/* //^ listens for toast components and renders them. */}
         </BrowserRouter>
 
     </Provider>
-//   </React.StrictMode>,
+//   </React.StrictMode>
 )
