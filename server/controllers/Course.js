@@ -6,6 +6,7 @@ const User = require("../models/User.model")
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
 const { convertSecondsToDuration } = require("../utils/secToDuration")
 const Section = require("../models/Section.model")
+const SubSection = require("../models/SubSection.model")
 
 
 //& Create Course Handler

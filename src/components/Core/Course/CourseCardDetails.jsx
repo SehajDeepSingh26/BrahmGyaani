@@ -78,9 +78,9 @@ const CourseCardDetails = ({ course, setConfirmationModal, handleBuyCourse }) =>
                     ))}
                 </ul>
             </div>
-            <div>
+            <div className='flex items-center pl-28 translate-x-1'>
                 <button
-                    className='bg-gray-600 text-white px-4 py-2 rounded-md w-full'
+                    className='bg-blue-400 text-white px-4 py-2 rounded-md w-32 '
                     onClick={handleShare}
                 >
                     Share

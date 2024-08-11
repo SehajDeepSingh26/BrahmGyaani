@@ -11,6 +11,7 @@ import { formatDate } from '../utils/dateFormatter';
 import { FaGlobe } from 'react-icons/fa';
 import CourseCardDetails from '../components/Core/Course/CourseCardDetails';
 import Footer from '../components/Common/Footer';
+import toast from 'react-hot-toast';
 
 const CourseDetails = () => {
     const { user } = useSelector((state) => state.profile);
@@ -61,6 +62,10 @@ const CourseDetails = () => {
     };
 
     const handleBuyCourse = () => {
+        if (user && user.accountType === "Instructor") {
+            toast.error("You are an instructor, you can't buy a course");
+            return;
+        }
         if (token) {
             buyCourse([courseId], token, user, navigate, dispatch);
             return;
@@ -161,13 +166,13 @@ const CourseDetails = () => {
                         <span>{totalNoOfLectures} lectures</span>
                         <span>{courseData.data.totalDuration} total length</span>
                     </div>
-                    <div
+                    {/* <div
                         onClick={() => setIsActive([])}
                     >
                         <button className='bg-blue-500 text-white px-4 py-2 rounded-md'>
                             Collapse all Sections
                         </button>
-                    </div>
+                    </div> */}
                     
                 </div>
             </div>

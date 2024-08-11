@@ -18,6 +18,7 @@ import {
 
 import { COURSE_STATUS } from "../../../../utils/constants"
 import ConfirmationModal from "../../../Common/ConfirmationModal"
+import { formatDate } from "../../../../utils/dateFormatter"
 
 export default function CoursesTable({ courses, setCourses }) {
     const dispatch = useDispatch()
@@ -97,7 +98,7 @@ export default function CoursesTable({ courses, setCourses }) {
                                         </p>
                                         <p className="text-[12px] text-white">
                                             Created:
-                                             {/* {formatDate(course.createdAt)} */}
+                                             {formatDate(course.createdAt)}
                                         </p>
                                         {course.status === COURSE_STATUS.PUBLISHED ? (
                                             <p className="flex w-fit flex-row items-center gap-2 rounded-full bg-richblack-700 px-2 py-[2px] text-[12px] font-medium text-yellow-100">
