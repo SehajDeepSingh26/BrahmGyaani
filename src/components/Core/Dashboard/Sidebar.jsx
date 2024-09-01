@@ -23,7 +23,7 @@ const Sidebar = () => {
         )}
 
     return (
-        <div className='flex flex-col gap-5 items-center min-w-[222px] border-r-[1px] border-richblue-700 h-[calc(100vh-3.5rem)] bg-richblack-800 py-10'>
+        <div className='flex flex-col gap-5 items-center fixed min-w-[222px] border-r-[1px]  border-richblue-700 h-[calc(100vh-3.5rem)] bg-richblack-800 py-10 z-50'>
             <div className="flex flex-col gap-3 ">
                 {
                     sidebarLinks.map((link, index) => {

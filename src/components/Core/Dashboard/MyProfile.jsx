@@ -9,7 +9,7 @@ const MyProfile = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="mt-0 max-w-4xl mx-auto p-6 pt-0 bg-gray-100 shadow-lg rounded-lg space-y-5">
+        <div className="mt-5 max-w-4xl ml-28 p-6 pt-0 bg-gray-100 shadow-lg rounded-lg space-y-5">
             <div className="flex flex-col pb-0 p-3 pt-0 shadow-md rounded-lg">
                 <h1 className="text-3xl font-bold mb-1 text-richblack-5">
                     My Profile

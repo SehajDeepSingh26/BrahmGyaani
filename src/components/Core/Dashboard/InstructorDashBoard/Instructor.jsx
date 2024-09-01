@@ -42,7 +42,7 @@ const Instructor = () => {
     });
 
     return (
-        <div className="text-white p-4 flex flex-col lg:flex-row">
+        <div className="text-white p-4 flex flex-col lg:flex-row ml-24">
             <div className="lg:w-2/3">
                 <div className="mb-8">
                     <h1 className="text-3xl font-bold">Hi {user?.firstName}</h1>

@@ -23,7 +23,7 @@ const EnrolledCourses = () => {
     }, [])
 
     return (
-        <div className="bg-richblack-800 text-richblack-5 min-h-screen p-8">
+        <div className="bg-richblack-800 text-richblack-5 min-h-screen p-8 ml-32">
             <h1 className="text-3xl font-bold mb-6">Enrolled Courses</h1>
             {
                 !enrolledCourses ? (

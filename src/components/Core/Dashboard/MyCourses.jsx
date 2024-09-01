@@ -21,7 +21,7 @@ const MyCourses = () => {
     }, [token])
 
     return (
-        <div className="p-6">
+        <div className="p-6 ml-32">
             <div className="flex justify-between items-center mb-6">
                 <h1 className="text-2xl font-semibold text-richblack-5">My Courses</h1>
                 <IconBtn
