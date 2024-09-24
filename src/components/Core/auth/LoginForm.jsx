@@ -16,7 +16,7 @@ function LoginForm() {
     const [showPassword, setShowPassword] = useState(false)
 
     const { email, password } = formData
-    console.log(email, password)
+    // console.log(email, password)
 
     const handleOnChange = (e) => {
         setFormData((prevData) => ({

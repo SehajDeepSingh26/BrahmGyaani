@@ -163,6 +163,12 @@ exports.getEnrolledCourses = async (req, res) => {
                 populate: "subSection"
             }
           })
+          .populate({
+            path: "courses",
+            populate: {
+                path: "instructor",
+            }
+          })
           .exec()
         if (!userDetails) {
           return res.status(400).json({

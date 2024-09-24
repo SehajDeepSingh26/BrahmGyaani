@@ -32,14 +32,14 @@ const EnrolledCourses = () => {
                     <p className="text-lg">You have not enrolled in any course yet</p>
                 ) : (
                     <div>
-                        <div className="grid grid-cols-3 gap-4 mb-4 font-bold">
+                        <div className="grid grid-cols-2 gap-52 mb-4 items-center font-bold">
                             <p>Course Name</p>
-                            <p>Duration</p>
-                            <p>Progress</p>
+                            <p>Instructor</p>
+                            {/* <p>Progress</p> */}
                         </div>
                         {
                             enrolledCourses.map((course, i, arr) => (
-                                <div key={i} className={`grid grid-cols-3 gap-4 items-center bg-richblack-700 p-4 mb-4 rounded-lg ${i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"}`}>
+                                <div key={i} className={`grid grid-cols-2 gap-4 items-center bg-richblack-700 p-4 mb-4 rounded-lg ${i === arr.length - 1 ? "rounded-b-lg" : "rounded-none"}`}>
                                     <div 
                                         className="flex items-center gap-4"
                                         onClick={() => {
@@ -55,16 +55,16 @@ const EnrolledCourses = () => {
                                         </div>
                                     </div>
                                     <div className="text-center">
-                                        {course?.totalDuration}
+                                        {`${course?.instructor?.firstName} ${course?.instructor?.lastName}`}
                                     </div>
                                     <div className="text-center">
-                                        <p>Progress: {course?.progressPercentage || 0}%</p>
+                                        {/* <p>Progress: {course?.progressPercentage || 0}%</p>
                                         <ProgressBar
                                             completed={course.progressPercentage || 0}
                                             height='8px'
                                             isLabelVisible={false}
-                                        />
-                                    </div>
+                                        />*/}
+                                    </div> 
                                 </div>
                             ))
                         }

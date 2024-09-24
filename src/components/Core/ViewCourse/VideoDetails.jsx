@@ -5,7 +5,7 @@ import { markLectureAsComplete } from '../../../services/operations/courseDetail
 import { updateCompletedLectures } from '../../../slice/viewCourseSlice';
 
 import 'video-react/dist/video-react.css'; // import css
-import { Player } from 'video-react';
+import { ControlBar, PlaybackRateMenuButton, Player } from 'video-react';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import IconBtn from '../../Common/IconBtn';
 
@@ -15,6 +15,21 @@ const VideoDetails = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const playerRef = useRef();
+    const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : null
+
+    useEffect(() => {
+        const checkValidUser = async() => {
+            const stuList = courseEntireData?.studentsEnrolled;
+            var validUser = false
+            stuList.map((student) => {
+                if(user?._id == student)
+                    validUser = true;
+            })
+            if(!validUser)
+                navigate("/error")
+        }
+        checkValidUser();
+    }, [user])
 
     const { token } = useSelector((state) => state.auth);
     const { courseSectionData, courseEntireData, completedLectures } = useSelector((state) => state.viewCourse);
@@ -142,6 +157,7 @@ const VideoDetails = () => {
 
     return (
         <div className='mt-10 text-white'>
+            {/* {console.log(courseEntireData)} */}
             {
                 !videoData ? (
                     <div>No data found</div>
@@ -154,6 +170,7 @@ const VideoDetails = () => {
                             onEnded={() => setVideoEnded(true)}
                             src={videoData?.videoUrl}
                         >
+                            
                             <AiFillPlayCircle />
                         </Player>
 

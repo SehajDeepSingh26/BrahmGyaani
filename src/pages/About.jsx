@@ -41,7 +41,7 @@ const About = () => {
             </section>
 
             <section>
-                <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-0 text-richblack-500">
+                <div className="mx-auto flex w-11/12 z-[1000] max-w-maxContent flex-col justify-between gap-0 text-richblack-500">
                     <div className="flex flex-col items-center gap-10 lg:flex-row justify-between">
                         <div className="my-20 flex lg:w-[50%] flex-col gap-10">
                             <h1 className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
@@ -98,9 +98,9 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <StatsComponenet />
-            <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-5 text-white mb-[50px]">
-                <LearningGrid />
+            {/* <StatsComponenet /> */}
+            <section className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-5 text-white mb-[50px]">
+                {/* <LearningGrid /> */}
                 <p className='text-4xl font-bold text-center translate-y-3'>Reviews from Students</p>
                 <ReviewSlider />
             </section>

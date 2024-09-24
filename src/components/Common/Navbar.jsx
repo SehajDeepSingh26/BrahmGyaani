@@ -41,8 +41,9 @@ function Navbar() {
 
     return (
         <div
-            className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 w-full fixed top-0 z-30 transition-all duration-200 backdrop-filter backdrop-blur-lg`}
+            className={`flex h-14 items-center justify-center border-b-[1px] border-b-richblack-700 w-full fixed top-0 z-30 transition-all duration-200 backdrop-filter ${location.pathname!=='/about' ? " backdrop-blur-lg" : "bg-black"}`}
         >
+            {console.log(location)}
             <div className="flex w-11/12 max-w-maxContent items-center justify-between">
                 {/* Logo */}
                 <Link to="/">
@@ -111,7 +112,7 @@ function Navbar() {
                 {/* Login / Signup / Dashboard */}
                 <div className="hidden items-center gap-x-4 md:flex">
                     {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
-                        <Link to="/dashboard/cart" className="relative">
+                        <Link to="/dashboard/cart" className="relative translate-x-[-50px]">
                             <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
                             {totalItems > 0 && (
                                 <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">

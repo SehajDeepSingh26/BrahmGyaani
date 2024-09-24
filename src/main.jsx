@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
         <BrowserRouter>
             <App/>
-            <Toaster/>     {/* //^ listens for toast components and renders them. */}
+            <Toaster/>     {/* //^ listens for toast components and renders them.*/}
         </BrowserRouter>
 
     </Provider>

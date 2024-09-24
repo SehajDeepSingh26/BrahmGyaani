@@ -18,6 +18,7 @@ const CourseCard = ({course, Height}) => {
   return (
     <div>
         <Link to={`/courses/${course._id}`}>
+            {console.log(course)}
             <div className='ml-10 mr-5 w-10/12'>
                 <div>
                     <img 
@@ -30,7 +31,7 @@ const CourseCard = ({course, Height}) => {
                     <p>{course?.courseName}</p>
                     <p>{course?.instructor?.firstName} {course?.instructor?.lastName} </p>
                     <div className='flex gap-x-3'>
-                        <span>{avgReviewCount || 0}</span>
+                        <span>{avgReviewCount || 4.5}</span>
                         <RatingStars Review_Count={avgReviewCount} />
                         <span>{course?.ratingAndReviews?.length} Ratings</span>
                     </div>
